@@ -1,0 +1,72 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&family=Pixelify+Sans:wght@400;500;600;700&family=Silkscreen:wght@400;700&display=swap');
+
+:root {
+  --cn-color-sakura: #ffb7c5;
+  --cn-color-sakura-soft: #ffe0e8;
+  --cn-color-rose: #e85d75;
+  --cn-color-rose-deep: #a3324a;
+  --cn-color-cream: #fff5e1;
+  --cn-color-ivory: #fffdf7;
+  --cn-color-matcha: #a8c686;
+  --cn-color-matcha-deep: #6f8f55;
+  --cn-color-coffee: #6b4f3a;
+  --cn-color-coffee-deep: #4a3527;
+  --cn-color-night: #2e2430;
+  --cn-color-night-deep: #1c1620;
+  --cn-color-gold: #f2c14e;
+  --cn-color-ink: #2a1f26;
+  --cn-color-white: #ffffff;
+
+  --cn-bg-base: var(--cn-color-ivory);
+  --cn-bg-surface: var(--cn-color-cream);
+  --cn-bg-elevated: var(--cn-color-white);
+  --cn-text-primary: var(--cn-color-ink);
+  --cn-text-secondary: var(--cn-color-coffee);
+  --cn-text-inverse: var(--cn-color-ivory);
+  --cn-border: var(--cn-color-coffee);
+  --cn-border-soft: #d9c7b8;
+  --cn-primary: var(--cn-color-rose-deep);
+  --cn-primary-hover: #b83a55;
+  --cn-primary-pressed: #8c2a3f;
+  --cn-danger: #c94560;
+  --cn-success: var(--cn-color-matcha-deep);
+  --cn-warning: var(--cn-color-gold);
+  --cn-focus: var(--cn-color-sakura);
+
+  --cn-font-display: 'Pixelify Sans', 'Silkscreen', monospace;
+  --cn-font-label: 'Silkscreen', 'Pixelify Sans', monospace;
+  --cn-font-body: 'Nunito', system-ui, sans-serif;
+
+  --cn-space-1: 4px;
+  --cn-space-2: 8px;
+  --cn-space-3: 16px;
+  --cn-space-4: 24px;
+  --cn-space-5: 32px;
+  --cn-space-6: 40px;
+  --cn-space-7: 48px;
+  --cn-space-8: 64px;
+
+  --cn-border-thin: 2px;
+  --cn-border-base: 4px;
+  --cn-border-heavy: 6px;
+
+  --cn-shadow-sm: 2px 2px 0 var(--cn-color-coffee-deep);
+  --cn-shadow-md: 4px 4px 0 var(--cn-color-coffee-deep);
+  --cn-shadow-lg: 6px 6px 0 var(--cn-color-night);
+
+  --cn-radius-sm: 2px;
+  --cn-radius-md: 4px;
+  --cn-radius-pill: 999px;
+
+  --cn-motion-fast: 120ms;
+  --cn-motion-base: 180ms;
+  --cn-motion-slow: 260ms;
+}
+
+html {
+  font-size: 16px;
+}
+
+html.large-text {
+  font-size: 18px;
+}
