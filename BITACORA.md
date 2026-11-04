@@ -77,7 +77,7 @@ git log --oneline --all
 - Se registraron fechas, horas y respaldos de la fundación.
 - Se dejó constancia de que el proyecto es **eterno** y que la bitácora solo crece.
 **Archivos:** `BITACORA.md`
-**Respaldo:** pendiente de commit al cerrar esta sesión
+**Respaldo:** commit `9ae9434` — «docs: crear bitacora eterna con fechas y respaldos»
 **Siguiente:** mañana se inicia la Fase 1 (mesa de construcción).
 
 ---
@@ -109,6 +109,7 @@ Checklist para arrancar:
 | `60575b0` | 2026-11-03 18:35 | Registro de creación del repositorio en la bitácora del plan |
 | `f0aa4e6` | 2026-11-03 18:39 | README del proyecto |
 | `33c15d6` | 2026-11-03 18:39 | Registro de subida a GitHub |
+| `9ae9434` | 2026-11-03 18:43 | Bitácora eterna con fechas y respaldos |
 | _(siguiente)_ | — | Pendiente de la próxima sesión |
 
 ---
