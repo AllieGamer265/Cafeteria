@@ -429,6 +429,7 @@ Sin game over. La calidad solo afecta recompensa y reacción del cliente.
 |---|---|---|---|---|
 | 2026-11-03 | 0 | Creación de este documento de memoria y plan | `docs/MEMORIA_Y_PLAN_COCINA.md` | Hecho |
 | 2026-11-03 | 0 | Repositorio Git inicializado y commit base de seguridad (`64f0e78`) | `.gitignore`, todo el proyecto | Hecho |
+| 2026-11-03 | 0 | README agregado y remoto conectado a GitHub (`main`, force push) | `README.md`, `.git` | Hecho |
 | — | — | (Pendiente de aprobación para construir) | — | — |
 
 ### Plantilla para nuevas entradas
