@@ -57,6 +57,8 @@ export type IconName =
   | 'water'
   | 'herb'
   | 'fruit'
+  | 'scissors'
+  | 'box'
 
 interface IconProps {
   name: IconName
@@ -383,6 +385,20 @@ const icons: Record<IconName, ReactNode> = {
     <>
       <path d="M12 8c4 0 7 3 7 7s-3 6-7 6-7-2-7-6 3-7 7-7z" {...line} />
       <path d="M12 8V4M12 5c2-1 3-1 5-1" {...line} />
+    </>
+  ),
+  scissors: (
+    <>
+      <circle cx="6" cy="7" r="2.5" {...line} />
+      <circle cx="6" cy="17" r="2.5" {...line} />
+      <path d="M8 8l12 9M8 16L20 7" {...line} />
+    </>
+  ),
+  box: (
+    <>
+      <path d="M4 9h16v11H4z" {...line} />
+      <path d="M3 6h18v3H3zM12 6v14" {...line} />
+      <path d="M12 6c-2 0-4-1-4-3 2 0 4 1 4 3zM12 6c2 0 4-1 4-3-2 0-4 1-4 3z" {...line} />
     </>
   ),
 }

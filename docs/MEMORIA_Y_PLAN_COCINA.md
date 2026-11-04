@@ -2,9 +2,9 @@
 
 > **Proyecto:** Café Nido («Buen café, gran café»)
 > **Archivo:** `docs/MEMORIA_Y_PLAN_COCINA.md`
-> **Versión del documento:** 1.0
-> **Fecha:** 2026-11-03
-> **Estado:** **ESPERANDO APROBACIÓN — NO CONSTRUIR AÚN**
+> **Versión del documento:** 1.1
+> **Fecha:** 2026-11-04
+> **Estado:** **Fases 1 y 2 implementadas — Fase 3 pendiente de aprobación**
 > **Propósito:** Fuente de verdad del rediseño de la preparación de pedidos. Contiene la memoria literal de la conversación, la especificación completa, la estructura técnica propuesta, las fases y una bitácora para ir registrando cada cambio.
 
 ---
@@ -398,11 +398,12 @@ Sin game over. La calidad solo afecta recompensa y reacción del cliente.
 - Sin horno ni mesa de acabado todavía (quedan para la Fase 2).
 
 ### Fase 2 — Horno, acabado y transiciones
-- `OvenStation` con animación tranquila y barra de precisión.
+**Estado:** implementada el 2026-11-04.
+- `OvenStation` con animación tranquila y barra de precisión (horno o cafetera según la receta).
 - `FinishTable` con cortar opcional y cajita.
-- `KitchenCamera` con scroll automático suave.
-- Transición cliente → cocina (cliente desaparece).
-- Transición cocina → cliente al cerrar la cajita.
+- `KitchenCamera` con deslizamiento suave entre zonas.
+- Transición cliente → cocina y cocina → cliente mediante el overlay existente.
+- Calidad final combinada: ensamblaje 40 %, precisión del horno 40 %, acabado 20 %.
 
 ### Fase 3 — Ingredientes dinámicos
 - `data/ingredients.ts` y migración de recetas a ids.
@@ -432,7 +433,8 @@ Sin game over. La calidad solo afecta recompensa y reacción del cliente.
 | 2026-11-03 | 0 | Repositorio Git inicializado y commit base de seguridad (`64f0e78`) | `.gitignore`, todo el proyecto | Hecho |
 | 2026-11-03 | 0 | README agregado y remoto conectado a GitHub (`main`, force push) | `README.md`, `.git` | Hecho |
 | 2026-11-04 | 1 | Mesa de construcción: `OrderBanner`, `IngredientShelf`, `DoughStack`, `Workbench`, `Kitchen`, visuals de ingredientes e interacción drag + tap | `src/components/cooking/*`, `src/components/Icon.tsx`, `src/App.tsx`, `src/styles/global.css` | Hecho |
-| — | 2 | Horno, mesa de acabado y transiciones | — | Pendiente |
+| 2026-11-04 | 2 | Horno, mesa de acabado, cámara con transiciones y calidad combinada | `KitchenCamera.tsx`, `OvenStation.tsx`, `FinishTable.tsx`, `Kitchen.tsx`, `Icon.tsx`, `global.css` | Hecho |
+| — | 3 | Ingredientes dinámicos y tienda conectada | — | Pendiente |
 
 ### Plantilla para nuevas entradas
 

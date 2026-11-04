@@ -3,8 +3,11 @@ import { playSfx } from '../../services/audio'
 import type { Character as CharacterType, Recipe } from '../../types'
 import { Icon } from '../Icon'
 import { DoughStack } from './DoughStack'
+import { FinishTable } from './FinishTable'
 import { IngredientShelf } from './IngredientShelf'
+import { KitchenCamera } from './KitchenCamera'
 import { OrderBanner } from './OrderBanner'
+import { OvenStation } from './OvenStation'
 import { Workbench } from './Workbench'
 import { isDough } from './ingredientVisuals'
 
@@ -15,6 +18,8 @@ interface KitchenProps {
   onServe: (quality: number) => void
   onBack: () => void
 }
+
+type Phase = 'assemble' | 'oven' | 'finish'
 
 export function Kitchen({ recipe, character, reducedMotion, onServe, onBack }: KitchenProps) {
   const needsDough = useMemo(() => recipe.ingredients.some(isDough), [recipe])
@@ -31,6 +36,9 @@ export function Kitchen({ recipe, character, reducedMotion, onServe, onBack }: K
   const [selected, setSelected] = useState<string | null>(null)
   const [mistakes, setMistakes] = useState(0)
   const [shake, setShake] = useState(false)
+  const [phase, setPhase] = useState<Phase>('assemble')
+  const [ovenScore, setOvenScore] = useState(0)
+  const [cut, setCut] = useState(false)
 
   useEffect(() => {
     if (remaining !== 0) return
@@ -56,6 +64,22 @@ export function Kitchen({ recipe, character, reducedMotion, onServe, onBack }: K
   const isComplete =
     otherIngredients.every((ingredient) => layers.includes(ingredient)) &&
     (!needsDough || doughPlaced)
+
+  const heatVariant = useMemo<'oven' | 'brew'>(
+    () => (recipe.stations.includes('brew') && !recipe.stations.includes('oven') ? 'brew' : 'oven'),
+    [recipe],
+  )
+
+  const steps = useMemo(
+    () => [
+      { id: 'assemble', label: 'Ensamblaje' },
+      { id: 'oven', label: heatVariant === 'brew' ? 'Cafetera' : 'Horno' },
+      { id: 'finish', label: 'Acabado' },
+    ],
+    [heatVariant],
+  )
+
+  const phaseIndex = steps.findIndex((step) => step.id === phase)
 
   const placeDough = () => {
     if (doughPlaced) return
@@ -99,14 +123,26 @@ export function Kitchen({ recipe, character, reducedMotion, onServe, onBack }: K
   }
 
   const hint = isComplete
-    ? '¡Listo para servir!'
+    ? '¡Ingredientes listos!'
     : needsDough && !doughPlaced
       ? 'Toma una masa de la pila.'
       : selected
         ? 'Toca la mesa para colocarlo.'
         : 'Toca un ingrediente y luego la mesa, o arrástralo.'
 
-  const quality = Math.max(60, 100 - mistakes * 10)
+  const assemblyScore = Math.max(60, 100 - mistakes * 10)
+
+  const handleOvenDone = (score: number) => {
+    setOvenScore(score)
+    setPhase('finish')
+  }
+
+  const handleBox = () => {
+    const finishScore = cut ? 100 : 65
+    const quality = Math.round(assemblyScore * 0.4 + ovenScore * 0.4 + finishScore * 0.2)
+    playSfx('serve')
+    onServe(quality)
+  }
 
   return (
     <div className={`overlay kitchen-overlay ${reducedMotion ? 'kitchen-overlay--reduced' : ''}`}>
@@ -121,51 +157,89 @@ export function Kitchen({ recipe, character, reducedMotion, onServe, onBack }: K
           onBack={onBack}
         />
 
-        <div className="kitchen-stage">
-          <IngredientShelf
-            ingredients={recipe.ingredients}
-            placed={layers}
-            selected={selected}
-            doughPlaced={doughPlaced}
-            onSelect={selectIngredient}
-            onDragStart={() => playSfx('click')}
-          />
+        <ol className="kitchen-steps" aria-label="Etapas de la preparación">
+          {steps.map((step, index) => (
+            <li
+              key={step.id}
+              className={`kitchen-step ${index === phaseIndex ? 'is-active' : ''} ${
+                index < phaseIndex ? 'is-done' : ''
+              }`}
+            >
+              {index < phaseIndex ? <Icon name="check" size={11} /> : <span>{index + 1}</span>}
+              {step.label}
+            </li>
+          ))}
+        </ol>
 
-          <div className={`kitchen-floor ${needsDough ? '' : 'kitchen-floor--drink'}`}>
-            {needsDough ? (
-              <DoughStack
-                remaining={remaining}
-                refillPulse={refillPulse}
-                disabled={doughPlaced}
-                onTake={placeDough}
+        <KitchenCamera index={phaseIndex} instant={reducedMotion}>
+          <div className="kitchen-zone">
+            <div className="kitchen-stage">
+              <IngredientShelf
+                ingredients={recipe.ingredients}
+                placed={layers}
+                selected={selected}
+                doughPlaced={doughPlaced}
+                onSelect={selectIngredient}
                 onDragStart={() => playSfx('click')}
               />
-            ) : null}
 
-            <Workbench
-              needsDough={needsDough}
-              doughPlaced={doughPlaced}
-              layers={layers}
-              selected={selected}
-              onTap={handleTableTap}
-              onDropIngredient={placeIngredient}
+              <div className={`kitchen-floor ${needsDough ? '' : 'kitchen-floor--drink'}`}>
+                {needsDough ? (
+                  <DoughStack
+                    remaining={remaining}
+                    refillPulse={refillPulse}
+                    disabled={doughPlaced}
+                    onTake={placeDough}
+                    onDragStart={() => playSfx('click')}
+                  />
+                ) : null}
+
+                <Workbench
+                  needsDough={needsDough}
+                  doughPlaced={doughPlaced}
+                  layers={layers}
+                  selected={selected}
+                  onTap={handleTableTap}
+                  onDropIngredient={placeIngredient}
+                />
+              </div>
+            </div>
+
+            <footer className="kitchen-footer">
+              <p className="kitchen-hint">{hint}</p>
+              <button
+                className="cn-button cn-button--lg"
+                disabled={!isComplete}
+                onClick={() => {
+                  playSfx('oven')
+                  setPhase('oven')
+                }}
+              >
+                <Icon name={heatVariant === 'brew' ? 'coffee' : 'oven'} size={18} />
+                {heatVariant === 'brew' ? 'Pasar a la cafetera' : 'Llevar al horno'}
+              </button>
+            </footer>
+          </div>
+
+          <div className="kitchen-zone">
+            <OvenStation
+              variant={heatVariant}
+              active={phase === 'oven'}
+              reducedMotion={reducedMotion}
+              onDone={handleOvenDone}
             />
           </div>
-        </div>
 
-        <footer className="kitchen-footer">
-          <p className="kitchen-hint">{hint}</p>
-          <button
-            className="cn-button cn-button--lg"
-            disabled={!isComplete}
-            onClick={() => {
-              playSfx('serve')
-              onServe(quality)
-            }}
-          >
-            <Icon name="plate" size={18} /> Servir pedido
-          </button>
-        </footer>
+          <div className="kitchen-zone">
+            <FinishTable
+              recipe={recipe}
+              cut={cut}
+              reducedMotion={reducedMotion}
+              onToggleCut={() => setCut((value) => !value)}
+              onBox={handleBox}
+            />
+          </div>
+        </KitchenCamera>
       </section>
     </div>
   )

@@ -97,12 +97,26 @@ git log --oneline --all
 **Respaldo:** commit `0b71193` — «feat: mesa de construccion de la fase 1»
 **Siguiente:** probar en PC y móvil, luego iniciar Fase 2 (horno, acabado y transiciones).
 
+### 2026-11-04 · 12:06
+**Sesión:** 2 — Fase 2 · Horno, acabado y transiciones
+**Área:** Cocina / UI / Audio
+**Hecho:**
+- `KitchenCamera`: cámara con tres zonas y deslizamiento suave (sin animación si hay movimiento reducido).
+- Indicador de etapas: Ensamblaje → Horno/Cafetera → Acabado, con estados activo y completado.
+- `OvenStation`: horno o cafetera según la receta, barra de precisión calmada y puntuación por cercanía al centro.
+- `FinishTable`: cortar en porciones (opcional) y guardar en la cajita con animación antes de servir.
+- Calidad final combinada: ensamblaje 40 %, precisión del horno 40 %, acabado 20 %.
+- Se añadieron los iconos `scissors` y `box`.
+**Archivos:** `src/components/cooking/Kitchen.tsx`, `KitchenCamera.tsx`, `OvenStation.tsx`, `FinishTable.tsx`, `src/components/Icon.tsx`, `src/styles/global.css`
+**Respaldo:** pendiente de commit
+**Siguiente:** probar el flujo completo en PC y móvil y ajustar velocidades o tamaños si hace falta.
+
 ---
 
 ## Próxima sesión
 
 **Fecha prevista:** pendiente de confirmar
-**Objetivo:** probar la Fase 1 en PC y móvil e iniciar la **Fase 2 — Horno, acabado y transiciones**.
+**Objetivo:** probar el flujo completo en PC y móvil y pulir la experiencia de cocina.
 
 Checklist para arrancar:
 
@@ -113,10 +127,11 @@ Checklist para arrancar:
 - [x] Crear `DoughStack` (6 masas con recarga animada).
 - [x] Crear `Workbench` (masa + capas de ingredientes).
 - [x] Implementar interacción drag & drop + tap.
+- [x] Crear `OvenStation` (horno y barra de precisión).
+- [x] Crear `FinishTable` (cortar y cajita).
+- [x] Añadir scroll automático suave entre zonas.
 - [ ] Probar en PC y móvil.
-- [ ] Crear `OvenStation` (horno y barra de precisión).
-- [ ] Crear `FinishTable` (cortar y cajita).
-- [ ] Añadir scroll automático suave entre zonas.
+- [ ] Ajustar velocidades, tamaños y textos según la prueba.
 - [ ] Registrar avance aquí y hacer commit + push.
 
 ---
@@ -131,6 +146,7 @@ Checklist para arrancar:
 | `33c15d6` | 2026-11-03 18:39 | Registro de subida a GitHub |
 | `9ae9434` | 2026-11-03 18:43 | Bitácora eterna con fechas y respaldos |
 | `0b71193` | 2026-11-04 11:40 | Fase 1: mesa de construcción |
+| _(pendiente)_ | 2026-11-04 12:06 | Fase 2: horno, acabado y transiciones |
 
 ---
 

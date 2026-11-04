@@ -3035,3 +3035,373 @@ svg {
     width: 100%;
   }
 }
+
+/* ---------- Kitchen (Fase 2: horno y acabado) ---------- */
+
+.kitchen-steps {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 0;
+  padding: 7px 12px;
+  background: var(--cn-color-cream);
+  border-bottom: 4px solid var(--cn-color-coffee);
+  list-style: none;
+}
+
+.kitchen-step {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 3px 7px;
+  background: var(--cn-color-ivory);
+  border: 2px solid var(--cn-border-soft);
+  color: var(--cn-color-coffee);
+  font-family: var(--cn-font-label);
+  font-size: 0.46rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  transition: background var(--cn-motion-fast) ease, border-color var(--cn-motion-fast) ease;
+}
+
+.kitchen-step span {
+  display: grid;
+  place-items: center;
+  width: 14px;
+  height: 14px;
+  background: var(--cn-color-cream);
+  border: 1px solid currentColor;
+  font-size: 0.4rem;
+}
+
+.kitchen-step.is-active {
+  background: var(--cn-color-sakura);
+  border-color: var(--cn-color-rose-deep);
+  color: var(--cn-color-ink);
+}
+
+.kitchen-step.is-done {
+  background: var(--cn-color-matcha);
+  border-color: var(--cn-color-matcha-deep);
+  color: var(--cn-color-ink);
+}
+
+.kitchen-camera {
+  position: relative;
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
+  background: var(--cn-color-cream);
+}
+
+.kitchen-camera__track {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  transition: transform var(--cn-motion-slow) cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.kitchen-camera.is-instant .kitchen-camera__track {
+  transition: none;
+}
+
+.kitchen-camera__zone {
+  flex: 0 0 100%;
+  min-width: 0;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.kitchen-camera__zone.is-active {
+  pointer-events: auto;
+}
+
+.oven-station,
+.finish-station {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 12px;
+  overflow-y: auto;
+}
+
+.oven-stage {
+  flex: 1;
+  min-height: 210px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+  padding: 18px;
+  background: radial-gradient(circle at 50% 40%, var(--cn-color-ivory), var(--cn-color-cream));
+  border: 3px solid var(--cn-color-coffee);
+  box-shadow: inset 0 -4px 0 rgba(74, 53, 39, 0.1);
+}
+
+.oven-visual.is-baking .oven-window,
+.brew-visual.is-baking .brew-liquid {
+  animation: oven-breathe 2.8s ease-in-out infinite;
+}
+
+.oven-info,
+.finish-info {
+  padding: 10px 12px;
+  background: var(--cn-color-ivory);
+  border: 3px solid var(--cn-color-coffee);
+  box-shadow: var(--cn-shadow-sm);
+}
+
+.oven-info__head,
+.finish-info__head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--cn-color-coffee);
+}
+
+.oven-info__head h3,
+.finish-info__head h3 {
+  margin: 0;
+  font-family: var(--cn-font-display);
+  font-size: 1.25rem;
+  line-height: 1;
+  color: var(--cn-color-ink);
+}
+
+.oven-info__head p,
+.finish-info__head p {
+  margin: 2px 0 0;
+  color: var(--cn-text-secondary);
+  font-size: 0.78rem;
+}
+
+.oven-info__note,
+.finish-info__note {
+  margin: 8px 0 0;
+  color: var(--cn-text-secondary);
+  font-size: 0.72rem;
+}
+
+.finish-table {
+  position: relative;
+  flex: 1;
+  min-height: 230px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 26px;
+  padding: 18px;
+  background: repeating-linear-gradient(90deg, #c9a884 0 46px, #bd9a76 46px 50px);
+  border: 4px solid var(--cn-color-coffee);
+  box-shadow: inset 0 -6px 0 rgba(74, 53, 39, 0.25);
+}
+
+.finish-plate {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 170px;
+  height: 170px;
+  background: var(--cn-color-ivory);
+  border: 5px solid var(--cn-color-coffee);
+  border-radius: 50%;
+  box-shadow: inset 0 0 0 6px var(--cn-color-cream), var(--cn-shadow-sm);
+}
+
+.finish-plate__rim {
+  position: absolute;
+  inset: 11px;
+  border: 2px dashed var(--cn-border-soft);
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.finish-dessert {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 104px;
+  height: 104px;
+  border: 4px solid var(--cn-color-coffee-deep);
+  border-radius: 50%;
+  color: var(--cn-color-ivory);
+  box-shadow: inset 0 -6px 0 rgba(74, 53, 39, 0.22);
+  transition: transform 380ms cubic-bezier(0.2, 0.8, 0.2, 1), opacity 380ms ease;
+  animation: dessert-in var(--cn-motion-base) ease-out;
+}
+
+.finish-dessert.is-cut {
+  transform: rotate(-6deg);
+}
+
+.finish-dessert.is-cut::after {
+  content: '';
+  position: absolute;
+  left: 6%;
+  right: 6%;
+  top: 50%;
+  height: 3px;
+  background: var(--cn-color-ivory);
+  box-shadow: 0 6px 0 rgba(255, 253, 247, 0.6);
+  transform: rotate(-24deg);
+}
+
+.finish-dessert.is-boxing {
+  transform: translate(78px, 8px) scale(0.18);
+  opacity: 0.15;
+}
+
+.finish-box {
+  position: relative;
+  width: 118px;
+  height: 92px;
+  margin-top: 16px;
+  background: #d9b382;
+  border: 4px solid var(--cn-color-coffee-deep);
+  box-shadow: var(--cn-shadow-sm);
+}
+
+.finish-box__lid {
+  position: absolute;
+  left: -7px;
+  right: -7px;
+  top: -16px;
+  height: 20px;
+  background: var(--cn-color-sakura);
+  border: 4px solid var(--cn-color-coffee-deep);
+}
+
+.finish-box__ribbon {
+  position: absolute;
+  left: 50%;
+  top: -16px;
+  bottom: 0;
+  width: 16px;
+  transform: translateX(-50%);
+  background: var(--cn-color-rose);
+  border-left: 2px solid var(--cn-color-coffee-deep);
+  border-right: 2px solid var(--cn-color-coffee-deep);
+}
+
+.finish-box.is-filled {
+  animation: box-pop 380ms ease-out;
+}
+
+.finish-footer {
+  flex-wrap: wrap;
+}
+
+.finish-actions {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.finish-actions .cn-button.is-selected {
+  background: var(--cn-color-matcha);
+  border-color: var(--cn-color-matcha-deep);
+  color: var(--cn-color-ink);
+}
+
+@keyframes oven-breathe {
+  0%,
+  100% {
+    filter: brightness(1);
+    box-shadow: inset 0 0 0 4px var(--cn-color-rose);
+  }
+  50% {
+    filter: brightness(1.12);
+    box-shadow: inset 0 0 0 4px var(--cn-color-gold), 0 0 22px rgba(242, 193, 78, 0.45);
+  }
+}
+
+@keyframes dessert-in {
+  from {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes box-pop {
+  0% {
+    transform: scale(1);
+  }
+  40% {
+    transform: scale(1.08);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.reduced-motion .kitchen-camera__track,
+.kitchen-overlay--reduced .kitchen-camera__track {
+  transition: none !important;
+}
+
+.reduced-motion .oven-visual.is-baking .oven-window,
+.reduced-motion .brew-visual.is-baking .brew-liquid,
+.reduced-motion .finish-dessert,
+.reduced-motion .finish-box.is-filled,
+.kitchen-overlay--reduced .oven-visual.is-baking .oven-window,
+.kitchen-overlay--reduced .brew-visual.is-baking .brew-liquid,
+.kitchen-overlay--reduced .finish-dessert,
+.kitchen-overlay--reduced .finish-box.is-filled {
+  animation: none !important;
+}
+
+@media (max-width: 560px) {
+  .kitchen-step {
+    font-size: 0.42rem;
+    padding: 2px 5px;
+  }
+
+  .oven-stage {
+    min-height: 180px;
+    padding: 12px;
+  }
+
+  .finish-table {
+    gap: 14px;
+    padding: 12px;
+  }
+
+  .finish-plate {
+    width: 140px;
+    height: 140px;
+  }
+
+  .finish-dessert {
+    width: 88px;
+    height: 88px;
+  }
+
+  .finish-box {
+    width: 96px;
+    height: 78px;
+  }
+
+  .finish-actions {
+    width: 100%;
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .finish-actions .cn-button {
+    width: 100%;
+  }
+}
+
