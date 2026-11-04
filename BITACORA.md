@@ -108,7 +108,7 @@ git log --oneline --all
 - Calidad final combinada: ensamblaje 40 %, precisión del horno 40 %, acabado 20 %.
 - Se añadieron los iconos `scissors` y `box`.
 **Archivos:** `src/components/cooking/Kitchen.tsx`, `KitchenCamera.tsx`, `OvenStation.tsx`, `FinishTable.tsx`, `src/components/Icon.tsx`, `src/styles/global.css`
-**Respaldo:** pendiente de commit
+**Respaldo:** commit `aa4f5f8` — «feat: horno, acabado y transiciones de la fase 2»
 **Siguiente:** probar el flujo completo en PC y móvil y ajustar velocidades o tamaños si hace falta.
 
 ---
@@ -146,7 +146,7 @@ Checklist para arrancar:
 | `33c15d6` | 2026-11-03 18:39 | Registro de subida a GitHub |
 | `9ae9434` | 2026-11-03 18:43 | Bitácora eterna con fechas y respaldos |
 | `0b71193` | 2026-11-04 11:40 | Fase 1: mesa de construcción |
-| _(pendiente)_ | 2026-11-04 12:06 | Fase 2: horno, acabado y transiciones |
+| `aa4f5f8` | 2026-11-04 12:06 | Fase 2: horno, acabado y transiciones |
 
 ---
 
