@@ -389,12 +389,13 @@ Sin game over. La calidad solo afecta recompensa y reacción del cliente.
 - **Estado:** hecho.
 
 ### Fase 1 — Mesa de construcción
+**Estado:** implementada el 2026-11-04.
 - `OrderBanner` con el pedido fijo arriba.
-- `IngredientShelf` con 3 cuadritos fijos.
+- `IngredientShelf` con los cuadritos de ingredientes de la receta.
 - `DoughStack` con 6 masas y recarga animada.
 - `Workbench` con colocación de masa y capas de ingredientes.
 - Interacción doble (drag + tap).
-- Sin horno ni mesa de acabado todavía (o versiones mínimas).
+- Sin horno ni mesa de acabado todavía (quedan para la Fase 2).
 
 ### Fase 2 — Horno, acabado y transiciones
 - `OvenStation` con animación tranquila y barra de precisión.
@@ -430,7 +431,8 @@ Sin game over. La calidad solo afecta recompensa y reacción del cliente.
 | 2026-11-03 | 0 | Creación de este documento de memoria y plan | `docs/MEMORIA_Y_PLAN_COCINA.md` | Hecho |
 | 2026-11-03 | 0 | Repositorio Git inicializado y commit base de seguridad (`64f0e78`) | `.gitignore`, todo el proyecto | Hecho |
 | 2026-11-03 | 0 | README agregado y remoto conectado a GitHub (`main`, force push) | `README.md`, `.git` | Hecho |
-| — | — | (Pendiente de aprobación para construir) | — | — |
+| 2026-11-04 | 1 | Mesa de construcción: `OrderBanner`, `IngredientShelf`, `DoughStack`, `Workbench`, `Kitchen`, visuals de ingredientes e interacción drag + tap | `src/components/cooking/*`, `src/components/Icon.tsx`, `src/App.tsx`, `src/styles/global.css` | Hecho |
+| — | 2 | Horno, mesa de acabado y transiciones | — | Pendiente |
 
 ### Plantilla para nuevas entradas
 

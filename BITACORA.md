@@ -80,23 +80,43 @@ git log --oneline --all
 **Respaldo:** commit `9ae9434` — «docs: crear bitacora eterna con fechas y respaldos»
 **Siguiente:** mañana se inicia la Fase 1 (mesa de construcción).
 
+### 2026-11-04 · 11:40
+**Sesión:** 1 — Fase 1 · Mesa de construcción
+**Área:** Cocina / UI / Datos visuales
+**Hecho:**
+- Se implementó la mesa de construcción completa (Fase 1).
+- `OrderBanner`: pedido fijo arriba con cliente, receta y chips de ingredientes.
+- `IngredientShelf`: estante de cuadritos con los ingredientes de la receta.
+- `DoughStack`: pila de 6 masas, toma con clic/arrastre y recarga animada al agotarse.
+- `Workbench`: mesa de trabajo con masa, capas de ingredientes y variante de taza para bebidas.
+- Interacción doble: arrastrar y soltar en PC + tocar ingrediente y mesa en móvil.
+- Se añadieron iconos nuevos (dough, sugar, chocolate, milk, butter, water, herb, fruit) y visuals por ingrediente.
+- `CookingStation` se retiró del flujo; `App` ahora monta `Kitchen`.
+- Sin horno ni mesa de acabado todavía (quedan para la Fase 2).
+**Archivos:** `src/components/cooking/Kitchen.tsx`, `OrderBanner.tsx`, `IngredientShelf.tsx`, `DoughStack.tsx`, `Workbench.tsx`, `ingredientVisuals.ts`, `drag.ts`, `src/components/Icon.tsx`, `src/App.tsx`, `src/styles/global.css`
+**Respaldo:** pendiente (sin commit por indicación de no confirmar)
+**Siguiente:** probar en PC y móvil, luego iniciar Fase 2 (horno, acabado y transiciones).
+
 ---
 
 ## Próxima sesión
 
-**Fecha prevista:** 2026-11-04
-**Objetivo:** iniciar la **Fase 1 — Mesa de construcción**.
+**Fecha prevista:** pendiente de confirmar
+**Objetivo:** probar la Fase 1 en PC y móvil e iniciar la **Fase 2 — Horno, acabado y transiciones**.
 
 Checklist para arrancar:
 
-- [ ] Leer `docs/MEMORIA_Y_PLAN_COCINA.md`.
-- [ ] Confirmar ingredientes base (masa, chocolate, azúcar).
-- [ ] Crear `OrderBanner` (pedido fijo arriba).
-- [ ] Crear `IngredientShelf` (3 cuadritos).
-- [ ] Crear `DoughStack` (6 masas con recarga animada).
-- [ ] Crear `Workbench` (masa + capas de ingredientes).
-- [ ] Implementar interacción drag & drop + tap.
+- [x] Leer `docs/MEMORIA_Y_PLAN_COCINA.md`.
+- [x] Confirmar ingredientes base (masa, chocolate, azúcar).
+- [x] Crear `OrderBanner` (pedido fijo arriba).
+- [x] Crear `IngredientShelf` (cuadritos de la receta).
+- [x] Crear `DoughStack` (6 masas con recarga animada).
+- [x] Crear `Workbench` (masa + capas de ingredientes).
+- [x] Implementar interacción drag & drop + tap.
 - [ ] Probar en PC y móvil.
+- [ ] Crear `OvenStation` (horno y barra de precisión).
+- [ ] Crear `FinishTable` (cortar y cajita).
+- [ ] Añadir scroll automático suave entre zonas.
 - [ ] Registrar avance aquí y hacer commit + push.
 
 ---
@@ -110,7 +130,7 @@ Checklist para arrancar:
 | `f0aa4e6` | 2026-11-03 18:39 | README del proyecto |
 | `33c15d6` | 2026-11-03 18:39 | Registro de subida a GitHub |
 | `9ae9434` | 2026-11-03 18:43 | Bitácora eterna con fechas y respaldos |
-| _(siguiente)_ | — | Pendiente de la próxima sesión |
+| _(pendiente)_ | 2026-11-04 11:40 | Fase 1: mesa de construcción (sin commit todavía) |
 
 ---
 

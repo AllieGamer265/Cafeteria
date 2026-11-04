@@ -49,6 +49,14 @@ export type IconName =
   | 'plant'
   | 'lamp'
   | 'frame'
+  | 'dough'
+  | 'sugar'
+  | 'chocolate'
+  | 'milk'
+  | 'butter'
+  | 'water'
+  | 'herb'
+  | 'fruit'
 
 interface IconProps {
   name: IconName
@@ -322,6 +330,59 @@ const icons: Record<IconName, ReactNode> = {
     <>
       <rect x="4" y="5" width="16" height="14" {...line} />
       <path d="M4 16l5-5 3 3 3-3 5 5" {...line} />
+    </>
+  ),
+  dough: (
+    <>
+      <ellipse cx="12" cy="14" rx="8" ry="5" {...line} />
+      <path d="M6 13c2 1 4 1 6 0s4-1 6 0" {...line} />
+      <path d="M9 16c1 .6 2 .6 3 0" {...line} />
+    </>
+  ),
+  sugar: (
+    <>
+      <path d="M6 10l6-3 6 3v6l-6 3-6-3z" {...line} />
+      <path d="M6 10l6 3 6-3M12 13v6" {...line} />
+      <path d="M9 18l1 2M15 18l-1 2" {...line} />
+    </>
+  ),
+  chocolate: (
+    <>
+      <rect x="5" y="5" width="14" height="14" {...line} />
+      <path d="M5 11h14M11 5v14" {...line} />
+      <path d="M7 7l2 2M15 7l2 2M7 15l2-2M15 15l2-2" {...line} />
+    </>
+  ),
+  milk: (
+    <>
+      <path d="M8 8h8v13H8z" {...line} />
+      <path d="M9 8V4h6v4M8 12h8" {...line} />
+      <path d="M10 4V2h4v2" {...line} />
+    </>
+  ),
+  butter: (
+    <>
+      <path d="M5 11h14v8H5z" {...line} />
+      <path d="M5 11l3-3h14l-3 3M19 11v8" {...line} />
+      <path d="M9 15h5" {...line} />
+    </>
+  ),
+  water: (
+    <>
+      <path d="M12 3c4 5 6 8 6 11a6 6 0 0 1-12 0c0-3 2-6 6-11z" {...line} />
+      <path d="M9 14c0 2 1 3 3 3" {...line} />
+    </>
+  ),
+  herb: (
+    <>
+      <path d="M12 21V9" {...line} />
+      <path d="M12 13c-4 0-6-3-6-6 4 0 6 3 6 6zM12 11c4 0 6-3 6-6-4 0-6 3-6 6z" {...line} />
+    </>
+  ),
+  fruit: (
+    <>
+      <path d="M12 8c4 0 7 3 7 7s-3 6-7 6-7-2-7-6 3-7 7-7z" {...line} />
+      <path d="M12 8V4M12 5c2-1 3-1 5-1" {...line} />
     </>
   ),
 }

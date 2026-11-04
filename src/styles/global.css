@@ -2428,3 +2428,610 @@ svg {
     scroll-behavior: auto !important;
   }
 }
+
+/* ---------- Kitchen (Fase 1: mesa de construccion) ---------- */
+
+.kitchen-overlay {
+  padding: 12px;
+}
+
+.kitchen-panel {
+  width: min(1120px, 100%);
+  max-height: 96dvh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background: var(--cn-color-cream);
+  border: 4px solid var(--cn-color-coffee);
+  box-shadow: var(--cn-shadow-lg);
+  animation: panel-in var(--cn-motion-base) ease-out;
+}
+
+.order-banner {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  padding: 10px 12px;
+  background: var(--cn-color-ivory);
+  border-bottom: 4px solid var(--cn-color-coffee);
+}
+
+.order-banner__character {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding-right: 12px;
+  border-right: 2px dashed var(--cn-border-soft);
+}
+
+.order-banner__avatar {
+  display: grid;
+  place-items: center;
+  width: 52px;
+  height: 52px;
+  background: var(--cn-color-sakura);
+  border: 3px solid var(--cn-color-coffee);
+  box-shadow: var(--cn-shadow-sm);
+}
+
+.order-banner__who,
+.order-banner__title {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.1;
+}
+
+.order-banner small {
+  color: var(--cn-color-rose-deep);
+  font-family: var(--cn-font-label);
+  font-size: 0.46rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.order-banner__who strong {
+  font-family: var(--cn-font-display);
+  font-size: 1.1rem;
+  color: var(--cn-color-ink);
+}
+
+.order-banner__recipe {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.order-banner__icon {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border: 3px solid var(--cn-color-coffee);
+  color: var(--cn-color-ivory);
+}
+
+.order-banner__title h2 {
+  font-family: var(--cn-font-display);
+  font-size: 1.25rem;
+  line-height: 1;
+  color: var(--cn-color-ink);
+}
+
+.order-banner__ingredients {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 0 0 0 auto;
+  padding: 0;
+  list-style: none;
+}
+
+.order-banner__chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 7px;
+  background: var(--cn-color-cream);
+  border: 2px solid var(--cn-color-coffee);
+  color: var(--cn-color-coffee);
+  font-family: var(--cn-font-label);
+  font-size: 0.48rem;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+}
+
+.order-banner__chip.is-done {
+  background: var(--cn-color-matcha);
+  border-color: var(--cn-color-matcha-deep);
+  color: var(--cn-color-ink);
+}
+
+.kitchen-stage {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 12px;
+  overflow-y: auto;
+}
+
+.ingredient-shelf {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  padding: 10px;
+  background: var(--cn-color-ivory);
+  border: 3px solid var(--cn-color-coffee);
+  box-shadow: inset 0 -4px 0 rgba(74, 53, 39, 0.12);
+}
+
+.ingredient-shelf__label {
+  color: var(--cn-color-coffee);
+  font-family: var(--cn-font-label);
+  font-size: 0.54rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.ingredient-squares {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.ingredient-square {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  width: 62px;
+  padding: 4px;
+  background: var(--cn-color-cream);
+  border: 2px solid var(--cn-color-coffee);
+  color: var(--cn-color-coffee);
+  transition: transform var(--cn-motion-fast) ease, box-shadow var(--cn-motion-fast) ease,
+    border-color var(--cn-motion-fast) ease;
+}
+
+.ingredient-square:hover:not(:disabled) {
+  transform: translateY(-2px);
+  border-color: var(--cn-color-rose);
+}
+
+.ingredient-square.is-selected {
+  border-color: var(--cn-color-rose-deep);
+  box-shadow: 0 0 0 3px var(--cn-color-gold);
+}
+
+.ingredient-square.is-done {
+  opacity: 0.6;
+}
+
+.ingredient-square__icon {
+  display: grid;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  border: 2px solid var(--cn-color-coffee);
+  color: var(--cn-color-ivory);
+}
+
+.ingredient-square__name {
+  font-family: var(--cn-font-label);
+  font-size: 0.44rem;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  text-align: center;
+}
+
+.kitchen-floor {
+  flex: 1;
+  min-height: 0;
+  display: grid;
+  grid-template-columns: 190px minmax(0, 1fr);
+  gap: 12px;
+}
+
+.kitchen-floor--drink {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.dough-stack {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  padding: 12px;
+  background: var(--cn-color-ivory);
+  border: 3px solid var(--cn-color-coffee);
+}
+
+.dough-stack__label {
+  color: var(--cn-color-coffee);
+  font-family: var(--cn-font-label);
+  font-size: 0.54rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.dough-stack__pile {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 8px;
+  width: 100%;
+}
+
+.dough-ball {
+  position: relative;
+  aspect-ratio: 1;
+  padding: 0;
+  background: #f2d6b3;
+  border: 3px solid var(--cn-color-coffee-deep);
+  border-radius: 50%;
+  box-shadow: inset 0 -4px 0 rgba(74, 53, 39, 0.2), var(--cn-shadow-sm);
+  animation: dough-pop var(--cn-motion-base) ease-out both;
+  transition: transform var(--cn-motion-fast) ease;
+}
+
+.dough-ball:hover:not(:disabled) {
+  transform: translateY(-2px) scale(1.04);
+}
+
+.dough-ball::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 34%;
+  height: 34%;
+  transform: translate(-50%, -50%);
+  background: var(--cn-color-ivory);
+  border: 2px solid rgba(74, 53, 39, 0.4);
+  border-radius: 50%;
+}
+
+.dough-ball.is-gone {
+  background: transparent;
+  border-style: dashed;
+  box-shadow: none;
+  opacity: 0.35;
+  animation: none;
+}
+
+.dough-ball.is-gone::after {
+  background: transparent;
+  border-style: dashed;
+}
+
+.dough-stack__count {
+  color: var(--cn-color-coffee);
+  font-family: var(--cn-font-label);
+  font-size: 0.62rem;
+  letter-spacing: 0.04em;
+}
+
+.workbench {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  padding: 12px;
+  background: var(--cn-color-ivory);
+  border: 3px solid var(--cn-color-coffee);
+  cursor: pointer;
+}
+
+.workbench.is-ready {
+  border-color: var(--cn-color-rose-deep);
+}
+
+.workbench__surface {
+  position: relative;
+  flex: 1;
+  min-height: 220px;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  background: repeating-linear-gradient(90deg, #c9a884 0 46px, #bd9a76 46px 50px);
+  border: 4px solid var(--cn-color-coffee);
+  box-shadow: inset 0 -6px 0 rgba(74, 53, 39, 0.25);
+}
+
+.workbench__hint {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  color: var(--cn-color-coffee);
+  text-align: center;
+}
+
+.workbench__hint p {
+  max-width: 210px;
+  font-family: var(--cn-font-label);
+  font-size: 0.56rem;
+  letter-spacing: 0.03em;
+  line-height: 1.6;
+  text-transform: uppercase;
+}
+
+.workbench__caption {
+  padding-top: 8px;
+  color: var(--cn-color-coffee);
+  font-family: var(--cn-font-label);
+  font-size: 0.5rem;
+  letter-spacing: 0.04em;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.workbench__ghost {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  padding: 4px 8px;
+  background: var(--cn-color-night);
+  border: 2px solid var(--cn-color-sakura);
+  color: var(--cn-color-cream);
+  font-family: var(--cn-font-label);
+  font-size: 0.46rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  pointer-events: none;
+}
+
+.workpiece {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 190px;
+  height: 160px;
+}
+
+.workpiece.is-dough {
+  animation: panel-in var(--cn-motion-base) ease-out;
+}
+
+.dough-disc {
+  position: relative;
+  width: 150px;
+  height: 110px;
+  background: #f2d6b3;
+  border: 4px solid var(--cn-color-coffee-deep);
+  border-radius: 50%;
+  box-shadow: inset 0 -10px 0 rgba(74, 53, 39, 0.16), var(--cn-shadow-sm);
+}
+
+.dough-disc::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 46px;
+  height: 34px;
+  transform: translate(-50%, -50%);
+  background: var(--cn-color-ivory);
+  border: 4px solid var(--cn-color-coffee-deep);
+  border-radius: 50%;
+}
+
+.work-layer {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  border: 2px solid rgba(74, 53, 39, 0.45);
+  border-radius: 50%;
+  animation: layer-drop var(--cn-motion-base) ease-out;
+}
+
+.work-layer--sprinkle {
+  position: absolute;
+  inset: 0;
+  border: none;
+  border-radius: 0;
+  animation: panel-in var(--cn-motion-fast) ease-out;
+}
+
+.sprinkle-dot {
+  position: absolute;
+  width: 9px;
+  height: 9px;
+  border: 2px solid var(--cn-color-coffee-deep);
+}
+
+.cup-glass {
+  position: relative;
+  width: 128px;
+  height: 140px;
+  overflow: hidden;
+  background: rgba(255, 253, 247, 0.65);
+  border: 4px solid var(--cn-color-coffee-deep);
+  border-radius: 0 0 44px 44px;
+  box-shadow: inset 0 -8px 0 rgba(74, 53, 39, 0.12);
+  animation: panel-in var(--cn-motion-base) ease-out;
+}
+
+.cup-liquid-base {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 12px;
+  background: rgba(107, 79, 58, 0.16);
+}
+
+.cup-band {
+  position: absolute;
+  left: 0;
+  right: 0;
+  border-top: 2px solid rgba(74, 53, 39, 0.28);
+  animation: layer-drop var(--cn-motion-base) ease-out;
+}
+
+.kitchen-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+  padding: 10px 12px calc(10px + env(safe-area-inset-bottom));
+  background: var(--cn-color-ivory);
+  border-top: 4px solid var(--cn-color-coffee);
+}
+
+.kitchen-hint {
+  color: var(--cn-text-secondary);
+  font-family: var(--cn-font-label);
+  font-size: 0.52rem;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+}
+
+.kitchen-panel.is-shaking .workbench {
+  animation: workbench-shake 300ms ease-in-out;
+}
+
+@keyframes dough-pop {
+  0% {
+    transform: scale(0.4);
+    opacity: 0;
+  }
+  70% {
+    transform: scale(1.08);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes layer-drop {
+  0% {
+    transform: translate(-50%, -12px);
+    opacity: 0;
+  }
+  100% {
+    transform: translate(-50%, 0);
+    opacity: 1;
+  }
+}
+
+@keyframes workbench-shake {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-5px);
+  }
+  75% {
+    transform: translateX(5px);
+  }
+}
+
+.reduced-motion .dough-ball,
+.reduced-motion .work-layer,
+.reduced-motion .cup-glass,
+.reduced-motion .workpiece,
+.reduced-motion .kitchen-panel {
+  animation: none !important;
+}
+
+.kitchen-overlay--reduced .dough-ball,
+.kitchen-overlay--reduced .work-layer,
+.kitchen-overlay--reduced .cup-glass,
+.kitchen-overlay--reduced .workpiece,
+.kitchen-overlay--reduced .kitchen-panel {
+  animation: none !important;
+}
+
+@media (max-width: 760px) {
+  .kitchen-overlay {
+    padding: 8px;
+  }
+
+  .kitchen-panel {
+    max-height: 98dvh;
+  }
+
+  .order-banner__ingredients {
+    margin-left: 0;
+  }
+
+  .kitchen-floor {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .dough-stack {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+
+  .dough-stack__pile {
+    grid-template-columns: repeat(6, 1fr);
+    width: auto;
+    flex: 1;
+  }
+
+  .workbench__surface {
+    min-height: 190px;
+  }
+}
+
+@media (max-width: 560px) {
+  .order-banner {
+    gap: 6px;
+    padding: 8px;
+  }
+
+  .order-banner__character {
+    padding-right: 6px;
+  }
+
+  .order-banner__avatar {
+    width: 42px;
+    height: 42px;
+  }
+
+  .order-banner__title h2 {
+    font-size: 1.05rem;
+  }
+
+  .ingredient-square {
+    width: 56px;
+  }
+
+  .ingredient-square__icon {
+    width: 38px;
+    height: 38px;
+  }
+
+  .dough-stack {
+    padding: 8px;
+  }
+
+  .workbench {
+    padding: 8px;
+  }
+
+  .workbench__surface {
+    min-height: 170px;
+  }
+
+  .workpiece {
+    transform: scale(0.86);
+  }
+
+  .kitchen-footer {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .kitchen-footer .cn-button {
+    width: 100%;
+  }
+}

@@ -2,7 +2,7 @@ import { useEffect, useReducer, useState } from 'react'
 import { ActionDock } from './components/ActionDock'
 import { CafeScene } from './components/CafeScene'
 import { ConfirmDialog } from './components/ConfirmDialog'
-import { CookingStation } from './components/CookingStation'
+import { Kitchen } from './components/cooking/Kitchen'
 import { HelpModal } from './components/HelpModal'
 import { NightSummary } from './components/NightSummary'
 import { OrderTicket } from './components/OrderTicket'
@@ -219,7 +219,7 @@ export function App() {
       ) : null}
 
       {state.screen === 'cooking' && activeRecipe ? (
-        <CookingStation
+        <Kitchen
           recipe={activeRecipe}
           character={currentCharacter}
           reducedMotion={state.settings.reducedMotion}
