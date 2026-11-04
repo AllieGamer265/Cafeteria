@@ -94,7 +94,7 @@ git log --oneline --all
 - `CookingStation` se retiró del flujo; `App` ahora monta `Kitchen`.
 - Sin horno ni mesa de acabado todavía (quedan para la Fase 2).
 **Archivos:** `src/components/cooking/Kitchen.tsx`, `OrderBanner.tsx`, `IngredientShelf.tsx`, `DoughStack.tsx`, `Workbench.tsx`, `ingredientVisuals.ts`, `drag.ts`, `src/components/Icon.tsx`, `src/App.tsx`, `src/styles/global.css`
-**Respaldo:** pendiente (sin commit por indicación de no confirmar)
+**Respaldo:** commit `0b71193` — «feat: mesa de construccion de la fase 1»
 **Siguiente:** probar en PC y móvil, luego iniciar Fase 2 (horno, acabado y transiciones).
 
 ---
@@ -130,7 +130,7 @@ Checklist para arrancar:
 | `f0aa4e6` | 2026-11-03 18:39 | README del proyecto |
 | `33c15d6` | 2026-11-03 18:39 | Registro de subida a GitHub |
 | `9ae9434` | 2026-11-03 18:43 | Bitácora eterna con fechas y respaldos |
-| _(pendiente)_ | 2026-11-04 11:40 | Fase 1: mesa de construcción (sin commit todavía) |
+| `0b71193` | 2026-11-04 11:40 | Fase 1: mesa de construcción |
 
 ---
 
