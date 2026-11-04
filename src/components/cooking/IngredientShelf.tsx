@@ -22,6 +22,11 @@ export function IngredientShelf({
   return (
     <section className="ingredient-shelf" aria-label="Estante de ingredientes">
       <span className="ingredient-shelf__label">Ingredientes</span>
+      <span className="ingredient-shelf__vine" aria-hidden="true">
+        <span />
+        <span />
+        <span />
+      </span>
 
       <div className="ingredient-squares">
         {ingredients.map((ingredient) => {

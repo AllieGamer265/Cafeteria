@@ -67,6 +67,9 @@ export function Workbench({
       onDrop={handleDrop}
     >
       <div className="workbench__surface">
+        <span className="workbench__light" aria-hidden="true" />
+        <span className="workbench__pin" aria-hidden="true" />
+
         {!ready ? (
           <div className="workbench__hint">
             <Icon name="dough" size={52} />

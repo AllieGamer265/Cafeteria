@@ -172,7 +172,30 @@ export function Kitchen({ recipe, character, reducedMotion, onServe, onBack }: K
         </ol>
 
         <KitchenCamera index={phaseIndex} instant={reducedMotion}>
-          <div className="kitchen-zone">
+          <div className="kitchen-zone kitchen-zone--assemble">
+            <div className="kitchen-scene" aria-hidden="true">
+              <span className="kitchen-scene__sun" />
+              <span className="kitchen-scene__window" />
+              <span className="kitchen-scene__beam" />
+              <span className="kitchen-scene__lamp">
+                <span className="kitchen-scene__cord" />
+                <span className="kitchen-scene__shade" />
+                <span className="kitchen-scene__glow" />
+              </span>
+              <span className="kitchen-scene__plant">
+                <span className="kitchen-plant__leaf is-1" />
+                <span className="kitchen-plant__leaf is-2" />
+                <span className="kitchen-plant__leaf is-3" />
+                <span className="kitchen-plant__leaf is-4" />
+                <span className="kitchen-plant__pot" />
+              </span>
+              <span className="kitchen-scene__dust is-1" />
+              <span className="kitchen-scene__dust is-2" />
+              <span className="kitchen-scene__dust is-3" />
+              <span className="kitchen-scene__dust is-4" />
+              <span className="kitchen-scene__dust is-5" />
+            </div>
+
             <div className="kitchen-stage">
               <IngredientShelf
                 ingredients={recipe.ingredients}

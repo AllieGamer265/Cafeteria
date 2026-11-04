@@ -3405,3 +3405,1057 @@ svg {
   }
 }
 
+/* ---------- Kitchen aesthetic: Café de cuento cálido ---------- */
+
+.kitchen-overlay {
+  background:
+    radial-gradient(circle at 50% -10%, rgba(244, 201, 113, 0.2), transparent 55%),
+    radial-gradient(circle at 85% 100%, rgba(232, 162, 173, 0.12), transparent 50%),
+    linear-gradient(160deg, #241a1f 0%, #1b1418 55%, #120e11 100%);
+  backdrop-filter: blur(10px) saturate(1.05);
+  padding: clamp(8px, 2vw, 20px);
+}
+
+.kitchen-panel {
+  border: 1px solid rgba(255, 255, 255, 0.45);
+  border-radius: 30px;
+  background: linear-gradient(165deg, #fffaf1 0%, #f9ead6 55%, #f2dcc2 100%);
+  box-shadow:
+    0 40px 90px rgba(0, 0, 0, 0.5),
+    0 8px 24px rgba(0, 0, 0, 0.28),
+    inset 0 1px 0 rgba(255, 255, 255, 0.9);
+  animation: kitchen-panel-in 560ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.order-banner {
+  gap: 12px;
+  padding: 12px 16px;
+  background: linear-gradient(180deg, rgba(255, 253, 247, 0.94), rgba(255, 248, 236, 0.74));
+  border-bottom: 1px solid rgba(91, 65, 50, 0.12);
+}
+
+.order-banner__character {
+  border-right: 1px solid rgba(91, 65, 50, 0.12);
+}
+
+.order-banner__avatar {
+  border: 1px solid rgba(91, 65, 50, 0.16);
+  border-radius: 16px;
+  background: linear-gradient(160deg, #ffe6ec, #ffc9d4);
+  box-shadow:
+    0 6px 16px rgba(232, 93, 117, 0.22),
+    inset 0 1px 0 #fff;
+}
+
+.order-banner__icon {
+  border: 1px solid rgba(91, 65, 50, 0.18);
+  border-radius: 14px;
+  box-shadow: 0 6px 14px rgba(91, 65, 50, 0.18);
+}
+
+.order-banner small {
+  color: #a3324a;
+  font-family: var(--cn-font-body);
+  font-weight: 700;
+  font-size: 0.62rem;
+  letter-spacing: 0.02em;
+  text-transform: none;
+}
+
+.order-banner__who strong {
+  font-size: 1.15rem;
+  color: #3d2c22;
+}
+
+.order-banner__title h2 {
+  font-size: 1.35rem;
+  color: #3d2c22;
+}
+
+.order-banner__ingredients {
+  gap: 7px;
+}
+
+.order-banner__chip {
+  gap: 5px;
+  padding: 5px 10px;
+  border: 1px solid rgba(91, 65, 50, 0.14);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.62);
+  box-shadow: 0 2px 6px rgba(91, 65, 50, 0.06);
+  color: #6b4f3a;
+  font-family: var(--cn-font-body);
+  font-weight: 700;
+  font-size: 0.62rem;
+  letter-spacing: 0.01em;
+  text-transform: none;
+}
+
+.order-banner__chip.is-done {
+  border-color: rgba(111, 143, 85, 0.38);
+  background: linear-gradient(160deg, #d8e8c7, #b7d29d);
+  color: #3d5227;
+}
+
+.order-banner .cn-button--ghost {
+  border-radius: 999px;
+  font-family: var(--cn-font-body);
+  font-weight: 700;
+  font-size: 0.7rem;
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+.order-banner .cn-button--ghost:hover {
+  background: rgba(255, 183, 197, 0.3);
+}
+
+.kitchen-steps {
+  gap: 8px;
+  padding: 8px 16px;
+  background: rgba(255, 255, 255, 0.34);
+  border-bottom: 1px solid rgba(91, 65, 50, 0.1);
+}
+
+.kitchen-step {
+  gap: 6px;
+  padding: 5px 10px;
+  border: 1px solid rgba(91, 65, 50, 0.12);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.52);
+  color: #7a6353;
+  font-family: var(--cn-font-body);
+  font-weight: 700;
+  font-size: 0.62rem;
+  letter-spacing: 0.01em;
+  text-transform: none;
+  transition: background 260ms ease, border-color 260ms ease, color 260ms ease,
+    box-shadow 260ms ease;
+}
+
+.kitchen-step span {
+  width: 18px;
+  height: 18px;
+  border: none;
+  border-radius: 50%;
+  background: rgba(91, 65, 50, 0.08);
+  font-size: 0.55rem;
+}
+
+.kitchen-step.is-active {
+  border-color: rgba(163, 50, 74, 0.24);
+  background: linear-gradient(160deg, #ffd7df, #ffb7c5);
+  color: #7a2538;
+  box-shadow: 0 4px 10px rgba(232, 93, 117, 0.2);
+}
+
+.kitchen-step.is-done {
+  border-color: rgba(111, 143, 85, 0.3);
+  background: linear-gradient(160deg, #d8e8c7, #b7d29d);
+  color: #3d5227;
+}
+
+.kitchen-camera__track {
+  transition: transform 560ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.kitchen-zone--assemble {
+  position: relative;
+  isolation: isolate;
+  background:
+    radial-gradient(circle at 78% 10%, rgba(255, 235, 199, 0.92), transparent 42%),
+    linear-gradient(180deg, #f9e9d4 0%, #f4ddc2 55%, #e8ccae 100%);
+}
+
+.kitchen-zone--assemble .kitchen-stage {
+  position: relative;
+  z-index: 2;
+  gap: clamp(12px, 2vw, 18px);
+  padding: 54px clamp(14px, 2.4vw, 26px) 20px;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(91, 65, 50, 0.28) transparent;
+}
+
+.kitchen-zone--assemble .ingredient-shelf,
+.kitchen-zone--assemble .kitchen-floor {
+  width: min(100%, 960px);
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.kitchen-zone--assemble .kitchen-floor {
+  max-width: 780px;
+}
+
+.kitchen-zone--assemble .kitchen-footer {
+  position: relative;
+  z-index: 2;
+  padding: 12px clamp(14px, 2.4vw, 26px) calc(14px + env(safe-area-inset-bottom));
+  background: linear-gradient(180deg, rgba(255, 250, 241, 0.4), rgba(255, 248, 236, 0.96));
+  border-top: 1px solid rgba(91, 65, 50, 0.12);
+}
+
+.kitchen-zone--assemble .kitchen-hint {
+  color: #7a6353;
+  font-family: var(--cn-font-body);
+  font-weight: 700;
+  font-size: 0.72rem;
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+.kitchen-zone--assemble .cn-button {
+  border: none;
+  border-radius: 999px;
+  background: linear-gradient(160deg, #f07b90, #d84f6b);
+  box-shadow:
+    0 10px 22px rgba(216, 79, 107, 0.34),
+    inset 0 1px 0 rgba(255, 255, 255, 0.35);
+  font-family: var(--cn-font-body);
+  font-weight: 800;
+  font-size: 0.82rem;
+  letter-spacing: 0.02em;
+  text-transform: none;
+  transition: transform 220ms ease, box-shadow 220ms ease, filter 220ms ease;
+}
+
+.kitchen-zone--assemble .cn-button:hover:not(:disabled) {
+  transform: translateY(-2px);
+  filter: brightness(1.04);
+  box-shadow:
+    0 14px 26px rgba(216, 79, 107, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.35);
+}
+
+.kitchen-zone--assemble .cn-button:active:not(:disabled) {
+  transform: translateY(0);
+  box-shadow: 0 6px 14px rgba(216, 79, 107, 0.3);
+}
+
+.kitchen-zone--assemble .cn-button:disabled {
+  background: linear-gradient(160deg, #d9c7b8, #c9b3a1);
+  box-shadow: 0 6px 14px rgba(91, 65, 50, 0.12);
+  color: rgba(255, 255, 255, 0.85);
+  filter: none;
+}
+
+/* --- Escenario de fondo --- */
+
+.kitchen-scene {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.kitchen-scene::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at 50% 42%, transparent 42%, rgba(91, 65, 50, 0.2) 100%);
+  mix-blend-mode: multiply;
+}
+
+.kitchen-scene__sun {
+  position: absolute;
+  top: -6%;
+  right: 0;
+  width: min(30%, 300px);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 249, 222, 0.95), rgba(255, 224, 168, 0.38) 45%, transparent 70%);
+  filter: blur(2px);
+  animation: sun-glow 12s ease-in-out infinite;
+}
+
+.kitchen-scene__window {
+  position: absolute;
+  top: 2%;
+  right: 1%;
+  width: min(30%, 320px);
+  aspect-ratio: 1 / 1.12;
+  border: clamp(6px, 1vw, 10px) solid #efe0c8;
+  border-radius: 200px 200px 20px 20px;
+  background:
+    linear-gradient(90deg, transparent calc(50% - 3px), rgba(255, 255, 255, 0.72) calc(50% - 3px) calc(50% + 3px), transparent calc(50% + 3px)),
+    linear-gradient(0deg, transparent calc(48% - 3px), rgba(255, 255, 255, 0.72) calc(48% - 3px) calc(48% + 3px), transparent calc(48% + 3px)),
+    linear-gradient(180deg, #cfe6ea 0%, #dcece6 42%, #ffe6c7 70%, #ffd1a6 100%);
+  box-shadow:
+    inset 0 0 0 3px rgba(255, 255, 255, 0.7),
+    0 24px 60px rgba(91, 65, 50, 0.16);
+}
+
+.kitchen-scene__window::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 26%;
+  background:
+    radial-gradient(ellipse at 30% 100%, #b9d39f 0 30%, transparent 31%),
+    radial-gradient(ellipse at 75% 110%, #9fc087 0 38%, transparent 39%);
+  opacity: 0.82;
+}
+
+.kitchen-scene__beam {
+  position: absolute;
+  top: 4%;
+  right: 10%;
+  width: 58%;
+  height: 72%;
+  background: linear-gradient(160deg, rgba(255, 243, 214, 0.55), rgba(255, 243, 214, 0) 65%);
+  clip-path: polygon(45% 0, 100% 0, 65% 100%, 0 100%);
+  filter: blur(14px);
+  opacity: 0.7;
+  animation: beam-breathe 14s ease-in-out infinite;
+}
+
+.kitchen-scene__lamp {
+  position: absolute;
+  top: 0;
+  left: 2%;
+  width: 120px;
+  height: 190px;
+}
+
+.kitchen-scene__cord {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  width: 2px;
+  height: 48px;
+  transform: translateX(-50%);
+  background: linear-gradient(#5b4132, #8a5f3f);
+}
+
+.kitchen-scene__shade {
+  position: absolute;
+  left: 50%;
+  top: 44px;
+  width: 64px;
+  height: 26px;
+  transform: translateX(-50%);
+  border-radius: 50% 50% 8px 8px / 70% 70% 30% 30%;
+  background: linear-gradient(180deg, #e8a2ad, #d87889);
+  box-shadow: inset 0 -4px 0 rgba(91, 65, 50, 0.15);
+}
+
+.kitchen-scene__glow {
+  position: absolute;
+  left: 50%;
+  top: 68px;
+  width: 170px;
+  height: 170px;
+  transform: translateX(-50%);
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 226, 164, 0.55), transparent 65%);
+  animation: lamp-glow 9s ease-in-out infinite;
+}
+
+.kitchen-scene__plant {
+  position: absolute;
+  left: 2%;
+  bottom: 13%;
+  width: 120px;
+  height: 180px;
+  opacity: 0.92;
+}
+
+.kitchen-plant__pot {
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  width: 54px;
+  height: 44px;
+  transform: translateX(-50%);
+  border-radius: 8px 8px 14px 14px;
+  background: linear-gradient(180deg, #d99a83, #b66f5b);
+  box-shadow: inset 0 -4px 0 rgba(91, 65, 50, 0.15);
+}
+
+.kitchen-plant__leaf {
+  position: absolute;
+  width: 34px;
+  height: 64px;
+  border-radius: 60% 40% 55% 45%;
+  background: linear-gradient(180deg, #a9c98f, #6f8f55);
+  box-shadow: inset -2px -2px 0 rgba(61, 82, 39, 0.15);
+  transform-origin: 50% 100%;
+}
+
+.kitchen-plant__leaf.is-1 {
+  left: 38%;
+  bottom: 38px;
+  transform: rotate(-34deg);
+}
+
+.kitchen-plant__leaf.is-2 {
+  left: 48%;
+  bottom: 44px;
+  height: 76px;
+  transform: rotate(-4deg);
+}
+
+.kitchen-plant__leaf.is-3 {
+  left: 54%;
+  bottom: 38px;
+  transform: rotate(30deg);
+}
+
+.kitchen-plant__leaf.is-4 {
+  left: 30%;
+  bottom: 34px;
+  height: 52px;
+  transform: rotate(-58deg);
+}
+
+.kitchen-scene__dust {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: rgba(255, 248, 230, 0.85);
+  filter: blur(0.5px);
+  animation: dust-float 18s linear infinite;
+}
+
+.kitchen-scene__dust.is-1 {
+  left: 18%;
+  top: 30%;
+  animation-delay: -2s;
+}
+
+.kitchen-scene__dust.is-2 {
+  left: 34%;
+  top: 64%;
+  width: 4px;
+  height: 4px;
+  animation-delay: -7s;
+}
+
+.kitchen-scene__dust.is-3 {
+  left: 62%;
+  top: 22%;
+  width: 5px;
+  height: 5px;
+  animation-delay: -11s;
+}
+
+.kitchen-scene__dust.is-4 {
+  left: 74%;
+  top: 72%;
+  animation-delay: -4s;
+}
+
+.kitchen-scene__dust.is-5 {
+  left: 48%;
+  top: 42%;
+  width: 3px;
+  height: 3px;
+  animation-delay: -14s;
+}
+
+/* --- Estante de frascos --- */
+
+.ingredient-shelf {
+  position: relative;
+  align-items: flex-end;
+  gap: 14px;
+  flex-wrap: wrap;
+  padding: 22px 20px 28px;
+  overflow: visible;
+  border: 1px solid rgba(255, 255, 255, 0.68);
+  border-radius: 22px;
+  background: linear-gradient(160deg, rgba(255, 253, 247, 0.7), rgba(255, 244, 229, 0.46));
+  box-shadow:
+    0 18px 40px rgba(91, 65, 50, 0.14),
+    inset 0 1px 0 #fff;
+  backdrop-filter: blur(5px) saturate(1.06);
+}
+
+.ingredient-shelf::after {
+  content: '';
+  position: absolute;
+  left: 14px;
+  right: 14px;
+  bottom: 9px;
+  height: 12px;
+  border-radius: 8px;
+  background: linear-gradient(180deg, #d3a273, #b07a4f 60%, #8a5f3f);
+  box-shadow: 0 5px 12px rgba(91, 65, 50, 0.26);
+  pointer-events: none;
+}
+
+.ingredient-shelf::before {
+  content: '';
+  position: absolute;
+  left: 22px;
+  right: 22px;
+  bottom: 21px;
+  height: 3px;
+  border-radius: 2px;
+  background: rgba(255, 255, 255, 0.4);
+  pointer-events: none;
+}
+
+.ingredient-shelf__label {
+  position: absolute;
+  top: -13px;
+  left: 20px;
+  padding: 4px 12px;
+  border: 1px solid rgba(163, 50, 74, 0.18);
+  border-radius: 999px;
+  background: linear-gradient(160deg, #ffe3e8, #ffc4d0);
+  box-shadow: 0 4px 10px rgba(232, 93, 117, 0.18);
+  color: #8c2a3f;
+  font-family: var(--cn-font-body);
+  font-weight: 800;
+  font-size: 0.62rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.ingredient-shelf__vine {
+  position: absolute;
+  right: 18px;
+  top: -14px;
+  width: 46px;
+  height: 54px;
+  pointer-events: none;
+  transform-origin: 50% 0;
+  animation: vine-sway 9s ease-in-out infinite;
+}
+
+.ingredient-shelf__vine::before {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 0;
+  width: 2px;
+  height: 26px;
+  transform: translateX(-50%);
+  background: #6f8f55;
+}
+
+.ingredient-shelf__vine span {
+  position: absolute;
+  width: 16px;
+  height: 12px;
+  border-radius: 60% 40% 55% 45%;
+  background: linear-gradient(160deg, #b7d29d, #6f8f55);
+  box-shadow: inset -1px -1px 0 rgba(61, 82, 39, 0.15);
+}
+
+.ingredient-shelf__vine span:nth-child(1) {
+  left: 8px;
+  top: 18px;
+  transform: rotate(-28deg);
+}
+
+.ingredient-shelf__vine span:nth-child(2) {
+  right: 4px;
+  top: 26px;
+  transform: rotate(24deg);
+}
+
+.ingredient-shelf__vine span:nth-child(3) {
+  left: 18px;
+  top: 34px;
+  transform: rotate(10deg);
+}
+
+.ingredient-squares {
+  flex: 1;
+  justify-content: center;
+  gap: 10px;
+}
+
+.ingredient-square {
+  width: 78px;
+  padding: 8px 6px 7px;
+  border: 1px solid rgba(255, 255, 255, 0.82);
+  border-radius: 18px 18px 12px 12px;
+  background: linear-gradient(160deg, rgba(255, 255, 255, 0.86), rgba(255, 244, 229, 0.66));
+  box-shadow:
+    0 8px 18px rgba(91, 65, 50, 0.12),
+    inset 0 1px 0 #fff;
+  color: #5b4132;
+  transition: transform 260ms cubic-bezier(0.22, 1, 0.36, 1), box-shadow 260ms ease,
+    border-color 260ms ease;
+}
+
+.ingredient-square:hover:not(:disabled) {
+  transform: translateY(-4px);
+  border-color: rgba(232, 162, 173, 0.85);
+  box-shadow:
+    0 14px 26px rgba(91, 65, 50, 0.18),
+    inset 0 1px 0 #fff;
+}
+
+.ingredient-square.is-selected {
+  transform: translateY(-4px);
+  border-color: #e8a2ad;
+  box-shadow:
+    0 0 0 3px rgba(255, 183, 197, 0.55),
+    0 14px 26px rgba(232, 93, 117, 0.18);
+}
+
+.ingredient-square.is-done {
+  opacity: 1;
+  background: linear-gradient(160deg, rgba(216, 232, 199, 0.88), rgba(183, 210, 157, 0.72));
+  border-color: rgba(111, 143, 85, 0.3);
+}
+
+.ingredient-square.is-done .ingredient-square__icon {
+  filter: saturate(0.7);
+}
+
+.ingredient-square__icon {
+  width: 46px;
+  height: 46px;
+  border: 1px solid rgba(91, 65, 50, 0.18);
+  border-radius: 14px;
+  box-shadow:
+    inset 0 -4px 0 rgba(91, 65, 50, 0.12),
+    inset 0 1px 0 rgba(255, 255, 255, 0.5);
+}
+
+.ingredient-square__name {
+  color: #5b4132;
+  font-family: var(--cn-font-body);
+  font-weight: 800;
+  font-size: 0.66rem;
+  letter-spacing: 0.01em;
+  text-transform: none;
+}
+
+/* --- Cesta de masas --- */
+
+.dough-stack {
+  position: relative;
+  gap: 10px;
+  padding: 18px 14px 16px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  border-radius: 26px;
+  background: linear-gradient(160deg, #f6e4c9, #ecd0aa);
+  box-shadow:
+    0 18px 36px rgba(91, 65, 50, 0.16),
+    inset 0 1px 0 #fff;
+}
+
+.dough-stack::before {
+  content: '';
+  position: absolute;
+  inset: 8px;
+  border-radius: 20px;
+  background-image:
+    repeating-linear-gradient(45deg, rgba(255, 255, 255, 0.28) 0 2px, transparent 2px 8px),
+    repeating-linear-gradient(-45deg, rgba(139, 98, 65, 0.12) 0 2px, transparent 2px 8px);
+  opacity: 0.7;
+  pointer-events: none;
+}
+
+.dough-stack__label {
+  position: relative;
+  z-index: 1;
+  color: #8a5f3f;
+  font-family: var(--cn-font-body);
+  font-weight: 800;
+  font-size: 0.6rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.dough-stack__pile {
+  position: relative;
+  z-index: 1;
+  gap: 10px;
+}
+
+.dough-stack__count {
+  position: relative;
+  z-index: 1;
+  color: #8a5f3f;
+  font-family: var(--cn-font-body);
+  font-weight: 800;
+  font-size: 0.68rem;
+  letter-spacing: 0.04em;
+}
+
+.dough-ball {
+  border: 1px solid rgba(138, 95, 63, 0.35);
+  background: radial-gradient(circle at 35% 30%, #fbe8cf, #efcfa6 60%, #dfb886);
+  box-shadow:
+    0 6px 12px rgba(91, 65, 50, 0.18),
+    inset 0 2px 2px rgba(255, 255, 255, 0.8),
+    inset 0 -6px 10px rgba(176, 122, 79, 0.18);
+  animation: dough-pop 640ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  transition: transform 260ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.dough-ball:hover:not(:disabled) {
+  transform: translateY(-3px) scale(1.05);
+}
+
+.dough-ball::after {
+  border: 1px solid rgba(138, 95, 63, 0.25);
+  background: radial-gradient(circle at 50% 40%, #fff8ec, #f3e0c6);
+}
+
+.dough-ball.is-gone {
+  background: transparent;
+  border-style: dashed;
+  box-shadow: none;
+  opacity: 0.3;
+  animation: none;
+}
+
+/* --- Mesa de madera --- */
+
+.workbench {
+  position: relative;
+  padding: 0;
+  border: none;
+  border-radius: 28px;
+  background: transparent;
+  box-shadow: none;
+}
+
+.workbench.is-ready {
+  border: none;
+}
+
+.workbench__surface {
+  position: relative;
+  min-height: 250px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.32);
+  border-bottom: 10px solid #8a5f3f;
+  border-radius: 26px;
+  background:
+    radial-gradient(ellipse at 50% 30%, rgba(255, 244, 224, 0.26), transparent 55%),
+    repeating-linear-gradient(92deg, rgba(255, 255, 255, 0.05) 0 3px, transparent 3px 12px),
+    linear-gradient(170deg, #cb9c6d 0%, #bb8556 38%, #a9724b 100%);
+  box-shadow:
+    0 26px 50px rgba(91, 65, 50, 0.24),
+    inset 0 2px 0 rgba(255, 255, 255, 0.25),
+    inset 0 -10px 22px rgba(91, 65, 50, 0.18);
+}
+
+.workbench__surface::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 255, 255, 0.14),
+    inset 0 -40px 60px rgba(91, 65, 50, 0.18);
+  pointer-events: none;
+}
+
+.workbench__light {
+  position: absolute;
+  left: 50%;
+  top: 44%;
+  width: 70%;
+  aspect-ratio: 1;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 245, 219, 0.48), transparent 65%);
+  pointer-events: none;
+}
+
+.workbench__pin {
+  position: absolute;
+  left: 8%;
+  bottom: 12%;
+  width: 110px;
+  height: 16px;
+  border-radius: 999px;
+  background: linear-gradient(180deg, #e8c79f, #c89a6b);
+  box-shadow: 0 6px 12px rgba(74, 53, 39, 0.2);
+  transform: rotate(-14deg);
+  opacity: 0.65;
+  pointer-events: none;
+}
+
+.workbench__pin::before,
+.workbench__pin::after {
+  content: '';
+  position: absolute;
+  top: 2px;
+  width: 14px;
+  height: 12px;
+  border-radius: 4px;
+  background: linear-gradient(180deg, #b98a5f, #946842);
+}
+
+.workbench__pin::before {
+  left: -10px;
+}
+
+.workbench__pin::after {
+  right: -10px;
+}
+
+.workbench__hint {
+  position: relative;
+  z-index: 1;
+  color: #4a3527;
+}
+
+.workbench__hint svg {
+  opacity: 0.7;
+}
+
+.workbench__hint p {
+  max-width: 240px;
+  color: #5b4132;
+  font-family: var(--cn-font-body);
+  font-weight: 700;
+  font-size: 0.8rem;
+  letter-spacing: 0;
+  line-height: 1.5;
+  text-transform: none;
+}
+
+.workbench__caption {
+  align-self: center;
+  margin-top: 10px;
+  padding: 5px 12px;
+  border: 1px solid rgba(91, 65, 50, 0.12);
+  border-radius: 999px;
+  background: rgba(255, 250, 241, 0.72);
+  box-shadow: 0 4px 10px rgba(91, 65, 50, 0.08);
+  color: #6b4f3a;
+  font-family: var(--cn-font-body);
+  font-weight: 700;
+  font-size: 0.66rem;
+  letter-spacing: 0.01em;
+  text-transform: none;
+}
+
+.workbench__ghost {
+  right: 14px;
+  top: 14px;
+  padding: 5px 11px;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  border-radius: 999px;
+  background: rgba(46, 36, 48, 0.82);
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.2);
+  color: #fff8ec;
+  font-family: var(--cn-font-body);
+  font-weight: 700;
+  font-size: 0.64rem;
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+.workpiece {
+  position: relative;
+  z-index: 1;
+}
+
+.dough-disc {
+  width: 170px;
+  height: 126px;
+  border: none;
+  border-radius: 50%;
+  background: radial-gradient(ellipse at 40% 30%, #fdf0dc, #f2d6b3 55%, #dfb886);
+  box-shadow:
+    0 18px 30px rgba(74, 53, 39, 0.28),
+    inset 0 3px 2px rgba(255, 255, 255, 0.8),
+    inset 0 -14px 20px rgba(176, 122, 79, 0.22);
+}
+
+.dough-disc::after {
+  width: 52px;
+  height: 40px;
+  border: 1px solid rgba(138, 95, 63, 0.2);
+  background: radial-gradient(circle, #fff8ec, #f4e6d1);
+  box-shadow: inset 0 -4px 8px rgba(176, 122, 79, 0.12);
+}
+
+.work-layer {
+  border: 1px solid rgba(91, 65, 50, 0.2);
+  box-shadow: 0 3px 6px rgba(74, 53, 39, 0.12);
+}
+
+@keyframes kitchen-panel-in {
+  from {
+    opacity: 0;
+    transform: translateY(18px) scale(0.985);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes sun-glow {
+  0%,
+  100% {
+    opacity: 0.82;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.04);
+  }
+}
+
+@keyframes beam-breathe {
+  0%,
+  100% {
+    opacity: 0.55;
+  }
+  50% {
+    opacity: 0.78;
+  }
+}
+
+@keyframes lamp-glow {
+  0%,
+  100% {
+    opacity: 0.6;
+    transform: translateX(-50%) scale(1);
+  }
+  50% {
+    opacity: 0.85;
+    transform: translateX(-50%) scale(1.06);
+  }
+}
+
+@keyframes dust-float {
+  0% {
+    transform: translate3d(0, 0, 0);
+    opacity: 0;
+  }
+  15% {
+    opacity: 0.7;
+  }
+  85% {
+    opacity: 0.7;
+  }
+  100% {
+    transform: translate3d(-18px, -46px, 0);
+    opacity: 0;
+  }
+}
+
+@keyframes vine-sway {
+  0%,
+  100% {
+    transform: rotate(-2deg);
+  }
+  50% {
+    transform: rotate(2deg);
+  }
+}
+
+.reduced-motion .kitchen-panel,
+.kitchen-overlay--reduced .kitchen-panel,
+.reduced-motion .kitchen-scene__sun,
+.kitchen-overlay--reduced .kitchen-scene__sun,
+.reduced-motion .kitchen-scene__beam,
+.kitchen-overlay--reduced .kitchen-scene__beam,
+.reduced-motion .kitchen-scene__glow,
+.kitchen-overlay--reduced .kitchen-scene__glow,
+.reduced-motion .kitchen-scene__dust,
+.kitchen-overlay--reduced .kitchen-scene__dust,
+.reduced-motion .ingredient-shelf__vine,
+.kitchen-overlay--reduced .ingredient-shelf__vine {
+  animation: none !important;
+}
+
+@media (max-width: 760px) {
+  .kitchen-scene__window {
+    right: -8%;
+    width: 48%;
+    opacity: 0.6;
+  }
+
+  .kitchen-scene__lamp,
+  .kitchen-scene__plant {
+    display: none;
+  }
+
+  .kitchen-zone--assemble .kitchen-stage {
+    padding: 22px 12px 14px;
+    gap: 12px;
+  }
+
+  .ingredient-shelf {
+    padding: 20px 12px 24px;
+    border-radius: 18px;
+  }
+
+  .ingredient-squares {
+    gap: 7px;
+  }
+
+  .ingredient-square {
+    width: 64px;
+    padding: 6px 4px 5px;
+    border-radius: 14px;
+  }
+
+  .ingredient-square__icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 12px;
+  }
+
+  .ingredient-square__name {
+    font-size: 0.58rem;
+  }
+
+  .workbench__surface {
+    min-height: 210px;
+    border-radius: 20px;
+  }
+
+  .workbench__pin {
+    display: none;
+  }
+
+  .dough-stack {
+    border-radius: 20px;
+    padding: 12px;
+  }
+}
+
+@media (max-width: 560px) {
+  .kitchen-panel {
+    border-radius: 22px;
+  }
+
+  .order-banner {
+    padding: 10px;
+  }
+
+  .kitchen-steps {
+    padding: 7px 10px;
+  }
+
+  .kitchen-step {
+    padding: 4px 8px;
+    font-size: 0.56rem;
+  }
+
+  .ingredient-square {
+    width: 58px;
+  }
+
+  .ingredient-shelf__vine {
+    display: none;
+  }
+
+  .workbench__surface {
+    min-height: 190px;
+  }
+}
+
