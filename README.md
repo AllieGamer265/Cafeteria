@@ -68,6 +68,7 @@ Cafeteria/
 
 ## Documentación
 
+- [`BITACORA.md`](BITACORA.md) — bitácora eterna: fechas, horas y respaldos.
 - [`PLAN.md`](PLAN.md) — plan completo por fases.
 - [`DESIGN_SYSTEM.md`](DESIGN_SYSTEM.md) — paleta, tipografía y reglas de UI.
 - [`docs/MEMORIA_Y_PLAN_COCINA.md`](docs/MEMORIA_Y_PLAN_COCINA.md) — memoria de la conversación y especificación del rediseño de la cocina.
