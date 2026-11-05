@@ -36,7 +36,7 @@ export function DoughStack({
               disabled={disabled || !available}
               draggable={!disabled && available}
               onDragStart={(event) => {
-                event.dataTransfer.setData(DRAG_MIME, 'Masa')
+                event.dataTransfer.setData(DRAG_MIME, 'masa')
                 event.dataTransfer.effectAllowed = 'move'
                 onDragStart()
               }}

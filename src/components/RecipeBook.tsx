@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { getIngredientName } from '../data/ingredients'
 import { recipes } from '../data/recipes'
 import { playSfx } from '../services/audio'
 import type { RecipeCategory } from '../types'
@@ -80,7 +81,7 @@ export function RecipeBook({ day, currentRecipeId, onClose, onCook }: RecipeBook
                 </div>
                 <div className="recipe-card-body">
                   <h3>{recipe.name}</h3>
-                  <p>{recipe.ingredients.join(' · ')}</p>
+                  <p>{recipe.ingredients.map(getIngredientName).join(' · ')}</p>
                   <span className="recipe-meta">
                     Día {recipe.unlockDay} · {recipe.stations.length} pasos
                   </span>

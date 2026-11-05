@@ -1,7 +1,9 @@
 import type { CSSProperties, DragEvent, KeyboardEvent } from 'react'
+import { getIngredientName } from '../../data/ingredients'
+import type { IngredientKind } from '../../types'
 import { Icon } from '../Icon'
 import { DRAG_MIME } from './drag'
-import { getIngredientVisual, type IngredientKind } from './ingredientVisuals'
+import { getIngredientVisual } from './ingredientVisuals'
 
 interface WorkbenchProps {
   needsDough: boolean
@@ -128,11 +130,13 @@ export function Workbench({
           </div>
         )}
 
-        {selected ? <span className="workbench__ghost">{selected}</span> : null}
+        {selected ? <span className="workbench__ghost">{getIngredientName(selected)}</span> : null}
       </div>
 
       <p className="workbench__caption">
-        {selected ? `Toca la mesa para colocar ${selected.toLowerCase()}` : 'Mesa de trabajo'}
+        {selected
+          ? `Toca la mesa para colocar ${getIngredientName(selected).toLowerCase()}`
+          : 'Mesa de trabajo'}
       </p>
     </section>
   )

@@ -1,3 +1,4 @@
+import { getIngredientName } from '../data/ingredients'
 import type { Character as CharacterType, Recipe } from '../types'
 import { Character } from './Character'
 import type { IconName } from './Icon'
@@ -6,12 +7,20 @@ import { Icon } from './Icon'
 interface OrderTicketProps {
   character: CharacterType
   recipe: Recipe
+  ownedIngredients: string[]
   orderIndex: number
   day: number
   onStart: () => void
 }
 
-export function OrderTicket({ character, recipe, orderIndex, day, onStart }: OrderTicketProps) {
+export function OrderTicket({
+  character,
+  recipe,
+  ownedIngredients,
+  orderIndex,
+  day,
+  onStart,
+}: OrderTicketProps) {
   return (
     <aside className="order-ticket" aria-label={`Pedido de ${character.name}`}>
       <div className="ticket-top">
@@ -36,16 +45,24 @@ export function OrderTicket({ character, recipe, orderIndex, day, onStart }: Ord
         <div>
           <span className="ticket-kicker">PIDIÓ</span>
           <h3>{recipe.name}</h3>
-          <p>{recipe.ingredients.join(' · ')}</p>
+          <p>{recipe.ingredients.map(getIngredientName).join(' · ')}</p>
         </div>
       </div>
 
       <div className="ticket-ingredients">
-        {recipe.ingredients.map((ingredient) => (
-          <span className="ingredient-slot" key={ingredient}>
-            {ingredient}
-          </span>
-        ))}
+        {recipe.ingredients.map((id) => {
+          const locked = !ownedIngredients.includes(id)
+          return (
+            <span
+              className={`ingredient-slot ${locked ? 'is-locked' : ''}`}
+              key={id}
+              title={locked ? 'Consíguelo en la tienda' : undefined}
+            >
+              {locked ? <Icon name="lock" size={10} /> : null}
+              {getIngredientName(id)}
+            </span>
+          )
+        })}
       </div>
 
       <div className="ticket-mood">

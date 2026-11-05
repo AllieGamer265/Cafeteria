@@ -1,18 +1,23 @@
+import { ingredientById } from '../../data/ingredients'
 import { Icon } from '../Icon'
 import { DRAG_MIME } from './drag'
 import { getIngredientVisual, isDough } from './ingredientVisuals'
 
 interface IngredientShelfProps {
   ingredients: string[]
+  required: string[]
+  owned: string[]
   placed: string[]
   selected: string | null
   doughPlaced: boolean
-  onSelect: (name: string) => void
+  onSelect: (id: string) => void
   onDragStart: () => void
 }
 
 export function IngredientShelf({
   ingredients,
+  required,
+  owned,
   placed,
   selected,
   doughPlaced,
@@ -29,32 +34,56 @@ export function IngredientShelf({
       </span>
 
       <div className="ingredient-squares">
-        {ingredients.map((ingredient) => {
-          const visual = getIngredientVisual(ingredient)
-          const dough = isDough(ingredient)
-          const done = dough ? doughPlaced : placed.includes(ingredient)
+        {ingredients.map((id) => {
+          const ingredient = ingredientById(id)
+          const visual = getIngredientVisual(id)
+          const name = ingredient?.name ?? id
+          const dough = isDough(id)
+          const available = owned.includes(id)
+          const needed = required.includes(id)
+          const done = dough ? doughPlaced : placed.includes(id)
+          const locked = !available
+          const extra = available && !needed
+          const disabled = done || locked || extra
           return (
             <button
-              key={ingredient}
+              key={id}
               type="button"
-              className={`ingredient-square ${selected === ingredient ? 'is-selected' : ''} ${
+              className={`ingredient-square ${selected === id ? 'is-selected' : ''} ${
                 done ? 'is-done' : ''
-              }`}
-              onClick={() => onSelect(ingredient)}
-              disabled={done}
-              aria-pressed={selected === ingredient}
-              aria-label={`${ingredient}${dough ? ', tomar masa' : ''}${done ? ', ya colocado' : ''}`}
-              draggable={!done}
+              } ${locked ? 'is-locked' : ''} ${extra ? 'is-extra' : ''}`}
+              onClick={() => onSelect(id)}
+              disabled={disabled}
+              aria-pressed={selected === id}
+              title={
+                locked
+                  ? 'Consíguelo en la tienda'
+                  : extra
+                    ? 'No se usa en esta receta'
+                    : undefined
+              }
+              aria-label={`${name}${
+                locked
+                  ? ', bloqueado. Consíguelo en la tienda'
+                  : extra
+                    ? ', guardado. No se usa en esta receta'
+                    : dough
+                      ? ', tomar masa'
+                      : ''
+              }${done ? ', ya colocado' : ''}`}
+              draggable={!disabled}
               onDragStart={(event) => {
-                event.dataTransfer.setData(DRAG_MIME, ingredient)
+                event.dataTransfer.setData(DRAG_MIME, id)
                 event.dataTransfer.effectAllowed = 'move'
                 onDragStart()
               }}
             >
               <span className="ingredient-square__icon" style={{ backgroundColor: visual.color }}>
-                <Icon name={done ? 'check' : visual.icon} size={22} />
+                <Icon name={done ? 'check' : locked ? 'lock' : visual.icon} size={22} />
               </span>
-              <span className="ingredient-square__name">{ingredient}</span>
+              <span className="ingredient-square__name">{name}</span>
+              {locked ? <span className="ingredient-square__hint">Tienda</span> : null}
+              {extra ? <span className="ingredient-square__hint">Guardado</span> : null}
             </button>
           )
         })}

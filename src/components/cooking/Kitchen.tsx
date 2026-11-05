@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useState } from 'react'
+import { getIngredientName, isDefaultIngredient } from '../../data/ingredients'
 import { playSfx } from '../../services/audio'
 import type { Character as CharacterType, Recipe } from '../../types'
 import { Icon } from '../Icon'
@@ -14,6 +15,7 @@ import { isDough } from './ingredientVisuals'
 interface KitchenProps {
   recipe: Recipe
   character: CharacterType
+  ownedIngredients: string[]
   reducedMotion: boolean
   onServe: (quality: number) => void
   onBack: () => void
@@ -21,15 +23,38 @@ interface KitchenProps {
 
 type Phase = 'assemble' | 'oven' | 'finish'
 
-export function Kitchen({ recipe, character, reducedMotion, onServe, onBack }: KitchenProps) {
+export function Kitchen({
+  recipe,
+  character,
+  ownedIngredients,
+  reducedMotion,
+  onServe,
+  onBack,
+}: KitchenProps) {
   const needsDough = useMemo(() => recipe.ingredients.some(isDough), [recipe])
   const doughName = recipe.ingredients.find(isDough)
+  const doughAvailable = !doughName || ownedIngredients.includes(doughName)
   const otherIngredients = useMemo(
     () => recipe.ingredients.filter((ingredient) => !isDough(ingredient)),
     [recipe],
   )
+  const availableOther = useMemo(
+    () => otherIngredients.filter((ingredient) => ownedIngredients.includes(ingredient)),
+    [otherIngredients, ownedIngredients],
+  )
+  const missingRequired = useMemo(
+    () => recipe.ingredients.filter((ingredient) => !ownedIngredients.includes(ingredient)),
+    [recipe, ownedIngredients],
+  )
+  const shelfIngredients = useMemo(() => {
+    const extras = ownedIngredients.filter(
+      (ingredient) =>
+        !recipe.ingredients.includes(ingredient) && !isDefaultIngredient(ingredient),
+    )
+    return Array.from(new Set([...recipe.ingredients, ...extras]))
+  }, [recipe, ownedIngredients])
 
-  const [doughPlaced, setDoughPlaced] = useState(!needsDough)
+  const [doughPlaced, setDoughPlaced] = useState(!needsDough || !doughAvailable)
   const [remaining, setRemaining] = useState(6)
   const [refillPulse, setRefillPulse] = useState(0)
   const [layers, setLayers] = useState<string[]>([])
@@ -62,8 +87,8 @@ export function Kitchen({ recipe, character, reducedMotion, onServe, onBack }: K
   }, [layers, needsDough, doughPlaced, doughName])
 
   const isComplete =
-    otherIngredients.every((ingredient) => layers.includes(ingredient)) &&
-    (!needsDough || doughPlaced)
+    availableOther.every((ingredient) => layers.includes(ingredient)) &&
+    (!needsDough || !doughAvailable || doughPlaced)
 
   const heatVariant = useMemo<'oven' | 'brew'>(
     () => (recipe.stations.includes('brew') && !recipe.stations.includes('oven') ? 'brew' : 'oven'),
@@ -82,55 +107,77 @@ export function Kitchen({ recipe, character, reducedMotion, onServe, onBack }: K
   const phaseIndex = steps.findIndex((step) => step.id === phase)
 
   const placeDough = () => {
-    if (doughPlaced) return
+    if (doughPlaced || !doughAvailable) return
     setDoughPlaced(true)
     setSelected(null)
     setRemaining((value) => Math.max(0, value - 1))
     playSfx('pop')
   }
 
-  const placeIngredient = (name: string) => {
-    if (isDough(name)) {
+  const placeIngredient = (id: string) => {
+    if (!ownedIngredients.includes(id)) {
+      playSfx('error')
+      return
+    }
+    if (isDough(id)) {
       placeDough()
       return
     }
-    if (needsDough && !doughPlaced) {
+    if (!recipe.ingredients.includes(id)) {
+      playSfx('error')
+      return
+    }
+    if (needsDough && doughAvailable && !doughPlaced) {
       setMistakes((value) => value + 1)
       setShake(true)
       playSfx('error')
       return
     }
-    if (layers.includes(name)) {
+    if (layers.includes(id)) {
       playSfx('click')
       return
     }
-    setLayers((current) => [...current, name])
+    setLayers((current) => [...current, id])
     setSelected(null)
     playSfx('pop')
   }
 
-  const selectIngredient = (name: string) => {
-    if (isDough(name)) {
+  const selectIngredient = (id: string) => {
+    if (!ownedIngredients.includes(id) || !recipe.ingredients.includes(id)) {
+      playSfx('error')
+      return
+    }
+    if (isDough(id)) {
       placeDough()
       return
     }
     playSfx('click')
-    setSelected((current) => (current === name ? null : name))
+    setSelected((current) => (current === id ? null : id))
   }
 
   const handleTableTap = () => {
     if (selected) placeIngredient(selected)
   }
 
-  const hint = isComplete
-    ? '¡Ingredientes listos!'
-    : needsDough && !doughPlaced
+  const stepHint =
+    needsDough && doughAvailable && !doughPlaced
       ? 'Toma una masa de la pila.'
       : selected
         ? 'Toca la mesa para colocarlo.'
         : 'Toca un ingrediente y luego la mesa, o arrástralo.'
 
+  const missingNames = missingRequired.map(getIngredientName).join(', ')
+  const missingHint = missingRequired.length
+    ? `Falta ${missingNames}; consíguelo en la tienda.`
+    : null
+  const hint = isComplete
+    ? missingRequired.length
+      ? `Puedes continuar sin ${missingNames}. La calidad bajará.`
+      : '¡Ingredientes listos!'
+    : `${stepHint}${missingHint ? ` ${missingHint}` : ''}`
+
   const assemblyScore = Math.max(60, 100 - mistakes * 10)
+  const missingFactor = Math.max(0.35, 1 - missingRequired.length * 0.3)
 
   const handleOvenDone = (score: number) => {
     setOvenScore(score)
@@ -139,7 +186,9 @@ export function Kitchen({ recipe, character, reducedMotion, onServe, onBack }: K
 
   const handleBox = () => {
     const finishScore = cut ? 100 : 65
-    const quality = Math.round(assemblyScore * 0.4 + ovenScore * 0.4 + finishScore * 0.2)
+    const quality = Math.round(
+      (assemblyScore * 0.4 + ovenScore * 0.4 + finishScore * 0.2) * missingFactor,
+    )
     playSfx('serve')
     onServe(quality)
   }
@@ -154,6 +203,7 @@ export function Kitchen({ recipe, character, reducedMotion, onServe, onBack }: K
           character={character}
           recipe={recipe}
           completed={completed}
+          ownedIngredients={ownedIngredients}
           onBack={onBack}
         />
 
@@ -198,7 +248,9 @@ export function Kitchen({ recipe, character, reducedMotion, onServe, onBack }: K
 
             <div className="kitchen-stage">
               <IngredientShelf
-                ingredients={recipe.ingredients}
+                ingredients={shelfIngredients}
+                required={recipe.ingredients}
+                owned={ownedIngredients}
                 placed={layers}
                 selected={selected}
                 doughPlaced={doughPlaced}
@@ -207,7 +259,7 @@ export function Kitchen({ recipe, character, reducedMotion, onServe, onBack }: K
               />
 
               <div className={`kitchen-floor ${needsDough ? '' : 'kitchen-floor--drink'}`}>
-                {needsDough ? (
+                {needsDough && doughAvailable ? (
                   <DoughStack
                     remaining={remaining}
                     refillPulse={refillPulse}

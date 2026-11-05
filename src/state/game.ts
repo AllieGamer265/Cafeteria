@@ -1,4 +1,5 @@
 import { characters } from '../data/characters'
+import { getDefaultIngredientIds, ingredientById } from '../data/ingredients'
 import { recipes } from '../data/recipes'
 import { shopItems } from '../data/shop'
 import type { GameAction, GameState, Order, SaveData, Settings } from '../types'
@@ -10,6 +11,32 @@ export const defaultSettings: Settings = {
   sfx: true,
   reducedMotion: false,
   largeText: false,
+}
+
+function normalizeOwnedIngredients(
+  saved: string[] | undefined,
+  ownedItems: string[],
+): string[] {
+  const fromSave = Array.isArray(saved) ? saved : []
+  const fromItems = shopItems
+    .filter((item) => item.ingredientId && ownedItems.includes(item.id))
+    .map((item) => item.ingredientId as string)
+  return Array.from(
+    new Set([...getDefaultIngredientIds(), ...fromSave, ...fromItems]),
+  ).filter((id) => Boolean(ingredientById(id)))
+}
+
+function normalizeOwnedItems(
+  saved: string[] | undefined,
+  ownedIngredientIds: string[],
+): string[] {
+  const items = Array.isArray(saved) ? saved : []
+  const fromIngredients = shopItems
+    .filter((item) => item.ingredientId && ownedIngredientIds.includes(item.ingredientId))
+    .map((item) => item.id)
+  return Array.from(new Set([...items, ...fromIngredients])).filter((id) =>
+    shopItems.some((item) => item.id === id),
+  )
 }
 
 export function getUnlockedRecipeIds(day: number): string[] {
@@ -46,6 +73,7 @@ export const initialState: GameState = {
   dayEarnings: 0,
   dayStars: 0,
   ownedItems: [],
+  ownedIngredients: getDefaultIngredientIds(),
   unlockedRecipes: getUnlockedRecipeIds(1),
   settings: defaultSettings,
   toast: null,
@@ -72,6 +100,7 @@ export function gameReducer(state: GameState, action: GameAction): GameState {
 
     case 'CONTINUE_GAME': {
       const save = action.payload
+      const ownedIngredients = normalizeOwnedIngredients(save.ownedIngredients, save.ownedItems)
       return {
         ...state,
         screen: 'cafe',
@@ -82,7 +111,8 @@ export function gameReducer(state: GameState, action: GameAction): GameState {
         served: save.served,
         dayEarnings: save.dayEarnings,
         dayStars: save.dayStars,
-        ownedItems: save.ownedItems,
+        ownedItems: normalizeOwnedItems(save.ownedItems, ownedIngredients),
+        ownedIngredients,
         unlockedRecipes: save.unlockedRecipes,
         settings: { ...defaultSettings, ...save.settings },
         orders: save.orders,
@@ -160,11 +190,18 @@ export function gameReducer(state: GameState, action: GameAction): GameState {
       if (state.coins < item.price) {
         return { ...state, toast: 'Faltan monedas para eso.' }
       }
+      const ownedIngredients =
+        item.ingredientId && !state.ownedIngredients.includes(item.ingredientId)
+          ? [...state.ownedIngredients, item.ingredientId]
+          : state.ownedIngredients
       return {
         ...state,
         coins: state.coins - item.price,
         ownedItems: [...state.ownedItems, item.id],
-        toast: `Compraste: ${item.name}`,
+        ownedIngredients,
+        toast: item.ingredientId
+          ? `Compraste: ${item.name}. Ya está en tu estante.`
+          : `Compraste: ${item.name}`,
       }
     }
 
@@ -229,6 +266,7 @@ export function saveGame(state: GameState) {
     dayEarnings: state.dayEarnings,
     dayStars: state.dayStars,
     ownedItems: state.ownedItems,
+    ownedIngredients: state.ownedIngredients,
     unlockedRecipes: state.unlockedRecipes,
     settings: state.settings,
     orders: state.orders,
@@ -249,7 +287,14 @@ export function loadGame(): SaveData | null {
     if (!parsed || typeof parsed.day !== 'number' || !Array.isArray(parsed.orders)) {
       return null
     }
-    return { ...parsed, settings: { ...defaultSettings, ...parsed.settings } }
+    const ownedItems = Array.isArray(parsed.ownedItems) ? parsed.ownedItems : []
+    const ownedIngredients = normalizeOwnedIngredients(parsed.ownedIngredients, ownedItems)
+    return {
+      ...parsed,
+      ownedItems: normalizeOwnedItems(ownedItems, ownedIngredients),
+      ownedIngredients,
+      settings: { ...defaultSettings, ...parsed.settings },
+    }
   } catch {
     return null
   }

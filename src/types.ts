@@ -20,6 +20,17 @@ export type RecipeCategory = 'bebidas' | 'panaderia' | 'postres'
 
 export type ShopCategory = 'ingredientes' | 'equipo' | 'decoracion'
 
+export type IngredientKind = 'dough' | 'sauce' | 'powder' | 'sprinkle' | 'liquid' | 'solid'
+
+export interface Ingredient {
+  id: string
+  name: string
+  color: string
+  icon: string
+  kind: IngredientKind
+  unlockedByDefault: boolean
+}
+
 export interface CharacterColors {
   body: string
   accent: string
@@ -69,6 +80,7 @@ export interface ShopItem {
   description: string
   icon: string
   color: string
+  ingredientId?: string
 }
 
 export interface Settings {
@@ -96,6 +108,7 @@ export interface GameState {
   dayEarnings: number
   dayStars: number
   ownedItems: string[]
+  ownedIngredients: string[]
   unlockedRecipes: string[]
   settings: Settings
   toast: string | null
@@ -114,6 +127,7 @@ export interface SaveData {
   dayEarnings: number
   dayStars: number
   ownedItems: string[]
+  ownedIngredients: string[]
   unlockedRecipes: string[]
   settings: Settings
   orders: Order[]

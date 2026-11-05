@@ -162,6 +162,7 @@ export function App() {
               <OrderTicket
                 character={currentCharacter}
                 recipe={orderRecipe}
+                ownedIngredients={state.ownedIngredients}
                 orderIndex={state.orderIndex}
                 day={state.day}
                 onStart={openRecipe}
@@ -226,6 +227,7 @@ export function App() {
         <Kitchen
           recipe={activeRecipe}
           character={currentCharacter}
+          ownedIngredients={state.ownedIngredients}
           reducedMotion={state.settings.reducedMotion}
           onServe={handleServe}
           onBack={() => dispatch({ type: 'GO_SCREEN', screen: 'recipe' })}

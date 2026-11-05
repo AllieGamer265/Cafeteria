@@ -1,3 +1,4 @@
+import { getIngredientName } from '../../data/ingredients'
 import type { Character as CharacterType, Recipe } from '../../types'
 import { Character } from '../Character'
 import type { IconName } from '../Icon'
@@ -8,10 +9,17 @@ interface OrderBannerProps {
   character: CharacterType
   recipe: Recipe
   completed: string[]
+  ownedIngredients: string[]
   onBack: () => void
 }
 
-export function OrderBanner({ character, recipe, completed, onBack }: OrderBannerProps) {
+export function OrderBanner({
+  character,
+  recipe,
+  completed,
+  ownedIngredients,
+  onBack,
+}: OrderBannerProps) {
   return (
     <header className="order-banner">
       <button className="cn-button cn-button--ghost cn-button--sm" onClick={onBack}>
@@ -43,17 +51,26 @@ export function OrderBanner({ character, recipe, completed, onBack }: OrderBanne
       </div>
 
       <ul className="order-banner__ingredients" aria-label="Ingredientes del pedido">
-        {recipe.ingredients.map((ingredient) => {
-          const visual = getIngredientVisual(ingredient)
-          const done = completed.includes(ingredient)
+        {recipe.ingredients.map((id) => {
+          const visual = getIngredientVisual(id)
+          const name = getIngredientName(id)
+          const done = completed.includes(id)
+          const locked = !ownedIngredients.includes(id)
           return (
             <li
-              key={ingredient}
-              className={`order-banner__chip ${done ? 'is-done' : ''}`}
-              aria-label={`${ingredient}${done ? ', listo' : ', pendiente'}`}
+              key={id}
+              className={`order-banner__chip ${done ? 'is-done' : ''} ${
+                locked ? 'is-locked' : ''
+              }`}
+              aria-label={`${name}${
+                locked ? ', falta comprar en la tienda' : done ? ', listo' : ', pendiente'
+              }`}
             >
-              <Icon name={done ? 'check' : visual.icon} size={12} />
-              <span>{ingredient}</span>
+              <Icon
+                name={locked ? 'lock' : done ? 'check' : visual.icon}
+                size={12}
+              />
+              <span>{name}</span>
             </li>
           )
         })}
