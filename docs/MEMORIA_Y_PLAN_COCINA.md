@@ -2,9 +2,9 @@
 
 > **Proyecto:** Café Nido («Buen café, gran café»)
 > **Archivo:** `docs/MEMORIA_Y_PLAN_COCINA.md`
-> **Versión del documento:** 1.2
-> **Fecha:** 2026-11-04
-> **Estado:** **Fases 1 y 2 implementadas + rediseño estético de ensamblaje — Fase 3 pendiente de aprobación**
+> **Versión del documento:** 1.3
+> **Fecha:** 2026-11-05
+> **Estado:** **Fases 1, 2 y 3 implementadas + rediseño estético de ensamblaje — Fase 4 pendiente de aprobación**
 > **Propósito:** Fuente de verdad del rediseño de la preparación de pedidos. Contiene la memoria literal de la conversación, la especificación completa, la estructura técnica propuesta, las fases y una bitácora para ir registrando cada cambio.
 
 ---
@@ -312,29 +312,30 @@ La cocina es una **escena con scroll automático suave** entre tres zonas. El ju
 
 ## 6. Estructura técnica propuesta
 
-> Nada de esto está implementado todavía. Es la propuesta a validar.
+> Implementado en la Fase 3. El detalle real quedó así:
 
 ### 6.1 Datos
 
-- **`src/data/ingredients.ts`** (nuevo):
+- **`src/data/ingredients.ts`** (nuevo, 16 ingredientes):
   ```ts
   export interface Ingredient {
     id: string          // 'masa', 'chocolate', 'azucar', 'chispas'
     name: string        // 'Masa', 'Chocolate', ...
     color: string       // color de la capa/icono
     icon: string        // nombre del icono existente
-    layer: 'base' | 'sauce' | 'sprinkle' | 'powder'
+    kind: 'dough' | 'sauce' | 'powder' | 'sprinkle' | 'liquid' | 'solid'
     unlockedByDefault: boolean
   }
   ```
-- **`src/data/recipes.ts`**: `Recipe.ingredients` pasa de nombres libres a **ids** de ingrediente. El recetario y la tienda resuelven nombres/colores desde `ingredients.ts`.
-- **`src/data/shop.ts`**: los ítems de categoría `ingredientes` se vinculan a un `ingredientId`. Se agrega **«Chispas confitadas»**.
+- **Ingredientes base (6):** Masa, Chocolate, Azúcar, Café, Leche y Mantequilla. Cubren todos los pedidos del Día 1. La progresión de «3 cubículos» se afinará en la Fase 4 al rediseñar los pedidos iniciales.
+- **`src/data/recipes.ts`**: `Recipe.ingredients` pasa de nombres libres a **ids** de ingrediente. El recetario, el ticket y la cocina resuelven nombres/colores desde `ingredients.ts`.
+- **`src/data/shop.ts`**: los ítems de categoría `ingredientes` se vinculan a un `ingredientId`. Se agregaron **Té**, **Hierba**, **Agua** y **Chispas confitadas**.
 
 ### 6.2 Estado y guardado
 
 - `GameState` agrega `ownedIngredients: string[]`.
 - `SaveData` agrega `ownedIngredients`.
-- `initialState` inicia con los 3 ingredientes base.
+- `initialState` inicia con los 6 ingredientes base (los necesarios para el Día 1 actual).
 - `BUY_ITEM`: si el ítem es un ingrediente, además de `ownedItems` se agrega a `ownedIngredients`.
 - Migración de guardado: si un guardado viejo no tiene `ownedIngredients`, se rellena con los ingredientes base.
 
@@ -406,10 +407,13 @@ Sin game over. La calidad solo afecta recompensa y reacción del cliente.
 - Calidad final combinada: ensamblaje 40 %, precisión del horno 40 %, acabado 20 %.
 
 ### Fase 3 — Ingredientes dinámicos
-- `data/ingredients.ts` y migración de recetas a ids.
-- `ownedIngredients` en estado y guardado.
-- Tienda conectada: comprar ingrediente agrega cuadrito.
-- Estante que crece.
+**Estado:** implementada el 2026-11-05.
+- `data/ingredients.ts` con 16 ingredientes y 6 base; recetas migradas a ids.
+- `ownedIngredients` en estado y guardado, con migración automática de guardados viejos y de compras previas de la tienda.
+- Tienda conectada: comprar un ingrediente lo agrega al estante de forma permanente.
+- Estante dinámico: muestra los ingredientes del pedido y los ingredientes comprados que no se usan en esa receta.
+- Ingredientes requeridos que no se poseen: cuadrito con candado y pista «Tienda». Se puede continuar sin ellos; la calidad final baja.
+- Verificación: `npm run typecheck` y `npm run build` pasan; pruebas de lógica de compra, migración y cobertura de ingredientes por receta.
 
 ### Fase 4 — Progresión narrativa
 - Día 1 con 3 ingredientes y 5 pedidos.
@@ -434,7 +438,7 @@ Sin game over. La calidad solo afecta recompensa y reacción del cliente.
 | 2026-11-03 | 0 | README agregado y remoto conectado a GitHub (`main`, force push) | `README.md`, `.git` | Hecho |
 | 2026-11-04 | 1 | Mesa de construcción: `OrderBanner`, `IngredientShelf`, `DoughStack`, `Workbench`, `Kitchen`, visuals de ingredientes e interacción drag + tap | `src/components/cooking/*`, `src/components/Icon.tsx`, `src/App.tsx`, `src/styles/global.css` | Hecho |
 | 2026-11-04 | 2 | Horno, mesa de acabado, cámara con transiciones y calidad combinada | `KitchenCamera.tsx`, `OvenStation.tsx`, `FinishTable.tsx`, `Kitchen.tsx`, `Icon.tsx`, `global.css` | Hecho |
-| — | 3 | Ingredientes dinámicos y tienda conectada | — | Pendiente |
+| 2026-11-05 | 3 | Ingredientes dinámicos: `ingredients.ts`, recetas por id, `ownedIngredients`, tienda conectada y estante que crece | `src/data/ingredients.ts`, `src/data/recipes.ts`, `src/data/shop.ts`, `src/state/game.ts`, `src/types.ts`, `src/components/cooking/*`, `src/components/OrderTicket.tsx`, `src/components/RecipeBook.tsx`, `src/App.tsx`, `src/styles/global.css` | Hecho |
 
 ### Plantilla para nuevas entradas
 
@@ -446,16 +450,16 @@ Sin game over. La calidad solo afecta recompensa y reacción del cliente.
 
 ## 9. Decisiones abiertas
 
-- [ ] Nombres exactos de los 3 ingredientes base (propuesta: Masa, Chocolate, Azúcar).
-- [ ] Nombre del ingrediente nuevo (propuesta: Chispas confitadas).
-- [ ] ¿Las 10 recetas iniciales son las actuales o se rediseñan?
-- [ ] ¿Cortar la dona da bonus de calidad o es solo cosmético?
-- [ ] ¿El ingrediente faltante se puede omitir sirviendo con menos calidad, o bloquea el pedido?
+- [x] Ingredientes base iniciales: Masa, Chocolate, Azúcar, Café, Leche y Mantequilla (cubren el Día 1; la progresión de 3 cubículos se afinará en la Fase 4).
+- [x] Nombre del ingrediente nuevo: Chispas confitadas (ya disponible en la tienda).
+- [x] Las 10 recetas iniciales se mantienen y se migraron a ids de ingrediente.
+- [x] Cortar da un bonus de calidad en el acabado.
+- [x] El ingrediente faltante se puede omitir sirviendo con menos calidad; el día no se bloquea.
 - [ ] ¿Cuántos cuadritos máximos tendrá el estante?
 - [ ] ¿El «Dame más información» es un tutorial de una sola vez o consultable siempre?
-- [ ] ¿Cómo se representa visualmente cada ingrediente (capas, sprites, CSS)?
+- [x] Representación visual: icono, color y tipo de capa definidos en `ingredients.ts`.
 - [ ] ¿Las bebidas reutilizan la mesa o tendrán su propia estación?
-- [ ] ¿Se mantiene el guardado actual o se versiona a v2 por `ownedIngredients`?
+- [x] Se mantiene el guardado actual (v1) con migración automática a `ownedIngredients`; no se versiona a v2.
 
 ---
 

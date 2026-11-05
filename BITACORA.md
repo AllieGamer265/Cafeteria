@@ -138,12 +138,27 @@ git log --oneline --all
 **Respaldo:** commit `60e1c17` — «fix: sincronizar pedido y burbuja del cliente»
 **Siguiente:** retomar la Fase 3 del rediseño de cocina (ingredientes dinámicos y conexión con la tienda).
 
+### 2026-11-05 · 14:34
+**Sesión:** 5 — Fase 3 · Ingredientes dinámicos
+**Área:** Datos / Estado / Tienda / Cocina / UI
+**Hecho:**
+- Se creó `src/data/ingredients.ts` con 16 ingredientes (6 base) y se migraron las recetas a ids.
+- `ownedIngredients` en estado y guardado, con migración automática de guardados viejos y compras previas de la tienda.
+- La tienda ahora vincula cada ingrediente a un `ingredientId`; al comprarlo se agrega al estante de forma permanente.
+- Se agregaron Té, Hierba, Agua y Chispas confitadas a la tienda.
+- El estante muestra los ingredientes del pedido y los comprados que no se usan en esa receta, con estados bloqueado y guardado.
+- Los pedidos con ingredientes faltantes se pueden completar; la calidad final baja.
+- Verificación: `npm run typecheck`, `npm run build` y pruebas de lógica de compra, migración y cobertura de ingredientes por receta.
+**Archivos:** `src/data/ingredients.ts`, `src/data/recipes.ts`, `src/data/shop.ts`, `src/state/game.ts`, `src/types.ts`, `src/components/cooking/*`, `src/components/OrderTicket.tsx`, `src/components/RecipeBook.tsx`, `src/App.tsx`, `src/styles/global.css`
+**Respaldo:** commit `ea2388f` — «feat: ingredientes dinamicos y tienda conectada»
+**Siguiente:** iniciar la Fase 4 (progresión narrativa: Día 1 de 3 ingredientes, cliente desconocido y tutorial).
+
 ---
 
 ## Próxima sesión
 
 **Fecha prevista:** pendiente de confirmar
-**Objetivo:** iniciar la Fase 3 del rediseño de cocina (ingredientes dinámicos y conexión con la tienda).
+**Objetivo:** iniciar la Fase 4 (progresión narrativa: Día 1 de 3 ingredientes, cliente desconocido y tutorial).
 
 Checklist para arrancar:
 
@@ -161,8 +176,12 @@ Checklist para arrancar:
 - [x] Ajustar velocidades, tamaños y textos según la prueba.
 - [x] Rediseñar la estética de la mesa de ensamblaje.
 - [x] Corregir la coherencia entre la burbuja del cliente y el ticket del pedido.
+- [x] Crear `src/data/ingredients.ts` y migrar recetas a ids.
+- [x] Agregar `ownedIngredients` al estado, guardado y migración.
+- [x] Conectar la tienda con los ingredientes y el estante.
+- [x] Mostrar ingredientes bloqueados y penalizar la calidad si faltan.
 - [x] Registrar avance aquí y hacer commit + push.
-- [ ] Iniciar Fase 3: ingredientes dinámicos y conexión con la tienda.
+- [ ] Iniciar Fase 4: progresión narrativa y tutorial.
 
 ---
 
@@ -179,6 +198,7 @@ Checklist para arrancar:
 | `aa4f5f8` | 2026-11-04 12:06 | Fase 2: horno, acabado y transiciones |
 | `67d99b3` | 2026-11-04 12:21 | Rediseño estético de la mesa de ensamblaje |
 | `60e1c17` | 2026-11-05 14:21 | Sincronización entre cliente y ticket |
+| `ea2388f` | 2026-11-05 14:34 | Fase 3: ingredientes dinámicos y tienda conectada |
 
 ---
 
