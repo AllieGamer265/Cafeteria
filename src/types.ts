@@ -42,6 +42,7 @@ export interface Character {
 export interface Recipe {
   id: string
   name: string
+  request: string
   category: RecipeCategory
   ingredients: string[]
   stations: Station[]

@@ -35,6 +35,10 @@ export function App() {
     characters.find((character) => character.id === currentOrder?.characterId) ?? characters[0]
   const orderRecipe = recipeById(currentOrder?.recipeId)
   const activeRecipe = recipeById(state.currentRecipeId) ?? orderRecipe ?? null
+  const currentRequest =
+    orderRecipe && currentCharacter.favoriteRecipe !== orderRecipe.id
+      ? orderRecipe.request
+      : currentCharacter.greeting
 
   useEffect(() => {
     document.documentElement.classList.toggle('reduced-motion', state.settings.reducedMotion)
@@ -110,7 +114,7 @@ export function App() {
 
   const handleTalk = () => {
     playSfx('pop')
-    dispatch({ type: 'TOAST', message: currentCharacter.greeting })
+    dispatch({ type: 'TOAST', message: currentRequest })
   }
 
   const handleServe = (quality: number) => {
@@ -150,7 +154,7 @@ export function App() {
             <div className="cafe-stage">
               <CafeScene
                 character={currentCharacter}
-                bubble={state.screen === 'cafe' ? currentCharacter.greeting : undefined}
+                bubble={state.screen === 'cafe' ? currentRequest : undefined}
               />
             </div>
 

@@ -4,6 +4,7 @@ export const recipes: Recipe[] = [
   {
     id: 'dona_chocolate',
     name: 'Dona de chocolate',
+    request: '¿Me preparas una dona de chocolate?',
     category: 'postres',
     ingredients: ['Masa', 'Chocolate', 'Azúcar'],
     stations: ['mix', 'oven', 'plate'],
@@ -16,6 +17,7 @@ export const recipes: Recipe[] = [
   {
     id: 'cafe_leche',
     name: 'Café con leche',
+    request: '¿Me preparas un café con leche?',
     category: 'bebidas',
     ingredients: ['Café', 'Leche', 'Azúcar'],
     stations: ['brew', 'plate'],
@@ -28,6 +30,7 @@ export const recipes: Recipe[] = [
   {
     id: 'pan_dulce',
     name: 'Pan dulce',
+    request: '¿Me preparas un pan dulce?',
     category: 'panaderia',
     ingredients: ['Masa', 'Azúcar', 'Mantequilla'],
     stations: ['mix', 'oven'],
@@ -40,6 +43,7 @@ export const recipes: Recipe[] = [
   {
     id: 'galleta_sakura',
     name: 'Galleta de sakura',
+    request: '¿Me preparas una galleta de sakura?',
     category: 'panaderia',
     ingredients: ['Masa', 'Mantequilla', 'Sakura'],
     stations: ['mix', 'oven'],
@@ -52,6 +56,7 @@ export const recipes: Recipe[] = [
   {
     id: 'chocolate_caliente',
     name: 'Chocolate caliente',
+    request: '¿Me preparas un chocolate caliente?',
     category: 'bebidas',
     ingredients: ['Chocolate', 'Leche', 'Canela'],
     stations: ['brew', 'plate'],
@@ -64,6 +69,7 @@ export const recipes: Recipe[] = [
   {
     id: 'matcha_latte',
     name: 'Matcha latte',
+    request: '¿Me preparas un matcha latte?',
     category: 'bebidas',
     ingredients: ['Matcha', 'Leche', 'Azúcar'],
     stations: ['brew', 'plate'],
@@ -76,6 +82,7 @@ export const recipes: Recipe[] = [
   {
     id: 'te_frutas',
     name: 'Té de frutas',
+    request: '¿Me preparas un té de frutas?',
     category: 'bebidas',
     ingredients: ['Té', 'Fruta', 'Miel'],
     stations: ['brew', 'plate'],
@@ -88,6 +95,7 @@ export const recipes: Recipe[] = [
   {
     id: 'muffin',
     name: 'Muffin',
+    request: '¿Me preparas un muffin?',
     category: 'panaderia',
     ingredients: ['Masa', 'Fruta', 'Azúcar'],
     stations: ['mix', 'oven'],
@@ -100,6 +108,7 @@ export const recipes: Recipe[] = [
   {
     id: 'postre_nuez',
     name: 'Postre de nuez',
+    request: '¿Me preparas un postre de nuez?',
     category: 'postres',
     ingredients: ['Masa', 'Nuez', 'Miel'],
     stations: ['mix', 'oven', 'plate'],
@@ -112,6 +121,7 @@ export const recipes: Recipe[] = [
   {
     id: 'infusion_zen',
     name: 'Infusión zen',
+    request: '¿Me preparas una infusión zen?',
     category: 'bebidas',
     ingredients: ['Hierba', 'Miel', 'Agua'],
     stations: ['brew', 'plate'],
