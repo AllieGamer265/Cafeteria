@@ -111,12 +111,39 @@ git log --oneline --all
 **Respaldo:** commit `aa4f5f8` — «feat: horno, acabado y transiciones de la fase 2»
 **Siguiente:** probar el flujo completo en PC y móvil y ajustar velocidades o tamaños si hace falta.
 
+### 2026-11-04 · 12:21
+**Sesión:** 3 — Rediseño estético de la mesa de ensamblaje
+**Área:** Cocina / UI
+**Hecho:**
+- Rediseño «Café de cuento cálido» aplicado solo a la zona de ensamblaje: panel crema, banner suave y etapas tipo pastilla.
+- Escena de fondo: ventana arqueada con luz de tarde, haz de luz, lámpara colgante, planta y polvo ambiental.
+- Estante de frascos de cristal con vid decorativa; cesta de masas y mesa de madera con luz y trapo.
+- Tipografía Nunito para etiquetas y botones; animaciones lentas y suaves, con respeto a movimiento reducido.
+- Se conservó intacta la funcionalidad: arrastrar/soltar, tap, teclado, pila de 6 masas, variante taza/bebida y calidad combinada.
+- Verificación automatizada vía CDP en 1440×1000 y 390×844: sin overflow de panel/etapa, sin errores de consola y con interacción de masa + ingrediente funcionando.
+- `npm run typecheck` y `npm run build` pasan.
+**Archivos:** `src/components/cooking/Kitchen.tsx`, `IngredientShelf.tsx`, `Workbench.tsx`, `src/styles/global.css`
+**Respaldo:** commit `67d99b3` — «feat: rediseno calido de la mesa de ensamblaje»
+**Siguiente:** recibir el feedback visual del usuario y pulir detalles; después retomar la Fase 3.
+
+### 2026-11-05 · 14:21
+**Sesión:** 4 — Sincronización entre cliente y ticket
+**Área:** Datos / UI
+**Hecho:**
+- Se corrigió la incoherencia donde la burbuja del cliente mostraba su receta favorita mientras el ticket mostraba otra receta (porque la favorita aún estaba bloqueada).
+- Cada receta ahora incluye un texto de pedido (`request`) acorde a su nombre.
+- La burbuja y la acción «Hablar» usan el pedido real; si coincide con la receta favorita, se conserva el saludo original del personaje.
+- Verificación: `npm run typecheck` y `npm run build` pasan sin errores.
+**Archivos:** `src/types.ts`, `src/data/recipes.ts`, `src/App.tsx`
+**Respaldo:** commit `60e1c17` — «fix: sincronizar pedido y burbuja del cliente»
+**Siguiente:** retomar la Fase 3 del rediseño de cocina (ingredientes dinámicos y conexión con la tienda).
+
 ---
 
 ## Próxima sesión
 
 **Fecha prevista:** pendiente de confirmar
-**Objetivo:** probar el flujo completo en PC y móvil y pulir la experiencia de cocina.
+**Objetivo:** iniciar la Fase 3 del rediseño de cocina (ingredientes dinámicos y conexión con la tienda).
 
 Checklist para arrancar:
 
@@ -130,9 +157,12 @@ Checklist para arrancar:
 - [x] Crear `OvenStation` (horno y barra de precisión).
 - [x] Crear `FinishTable` (cortar y cajita).
 - [x] Añadir scroll automático suave entre zonas.
-- [ ] Probar en PC y móvil.
-- [ ] Ajustar velocidades, tamaños y textos según la prueba.
-- [ ] Registrar avance aquí y hacer commit + push.
+- [x] Probar en PC y móvil.
+- [x] Ajustar velocidades, tamaños y textos según la prueba.
+- [x] Rediseñar la estética de la mesa de ensamblaje.
+- [x] Corregir la coherencia entre la burbuja del cliente y el ticket del pedido.
+- [x] Registrar avance aquí y hacer commit + push.
+- [ ] Iniciar Fase 3: ingredientes dinámicos y conexión con la tienda.
 
 ---
 
@@ -147,6 +177,8 @@ Checklist para arrancar:
 | `9ae9434` | 2026-11-03 18:43 | Bitácora eterna con fechas y respaldos |
 | `0b71193` | 2026-11-04 11:40 | Fase 1: mesa de construcción |
 | `aa4f5f8` | 2026-11-04 12:06 | Fase 2: horno, acabado y transiciones |
+| `67d99b3` | 2026-11-04 12:21 | Rediseño estético de la mesa de ensamblaje |
+| `60e1c17` | 2026-11-05 14:21 | Sincronización entre cliente y ticket |
 
 ---
 

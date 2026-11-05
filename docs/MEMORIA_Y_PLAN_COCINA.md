@@ -2,9 +2,9 @@
 
 > **Proyecto:** Café Nido («Buen café, gran café»)
 > **Archivo:** `docs/MEMORIA_Y_PLAN_COCINA.md`
-> **Versión del documento:** 1.1
+> **Versión del documento:** 1.2
 > **Fecha:** 2026-11-04
-> **Estado:** **Fases 1 y 2 implementadas — Fase 3 pendiente de aprobación**
+> **Estado:** **Fases 1 y 2 implementadas + rediseño estético de ensamblaje — Fase 3 pendiente de aprobación**
 > **Propósito:** Fuente de verdad del rediseño de la preparación de pedidos. Contiene la memoria literal de la conversación, la especificación completa, la estructura técnica propuesta, las fases y una bitácora para ir registrando cada cambio.
 
 ---
